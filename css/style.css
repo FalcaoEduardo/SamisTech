@@ -766,7 +766,7 @@ body {
     .btn-whatsapp, .btn-instagram { width: 100%; padding: 15px; }
 }
 /* =================================================================
-   BOTÃO FLUTUANTE WHATSAPP
+   BOTÃO FLUTUANTE WHATSAPP (COM ANIMAÇÃO DE ONDAS)
    ================================================================= */
 .whatsapp-float {
     position: fixed;
@@ -779,7 +779,66 @@ body {
     border-radius: 50%;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 1000; /* Garante que fique acima de tudo */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    
+    /* Importante para centralizar a onda */
+    position: fixed; 
+}
+
+/* O CÍRCULO DA ONDA (Pseudo-elemento) */
+/* Isso cria um círculo invisível atrás do botão */
+.whatsapp-float::before {
+    content: '';
+    position: absolute;
+    z-index: -1; /* Fica atrás do botão principal */
+    width: 100%;
+    height: 100%;
+    background-color: #25D366; /* Mesma cor do botão */
+    border-radius: 50%;
+    opacity: 0.7;
+    
+    /* Aplica a animação criada abaixo */
+    /* Nome | Duração | Repetição | Curva de velocidade */
+    animation: pulse-ripple 1.5s infinite ease-out;
+}
+
+/* A ANIMAÇÃO EM SI (Keyframes) */
+@keyframes pulse-ripple {
+    0% {
+        transform: scale(1); /* Começa do tamanho normal */
+        opacity: 0.7;        /* Meio transparente */
+    }
+    100% {
+        transform: scale(2.5); /* Cresce até 2.5x o tamanho */
+        opacity: 0;            /* Fica totalmente transparente no final */
+    }
+}
+
+/* =================================================================
+   BOTÃO FLUTUANTE WHATSAPP (MAIOR E MAIS PARA A ESQUERDA)
+   ================================================================= */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    
+    /* MUDANÇA AQUI: Afastado aprox. 2-3cm da borda direita */
+    right: 100px; 
+    
+    /* MUDANÇA AQUI: Botão bem maior */
+    width: 72px;
+    height: 72px;
+    
+    background-color: #25D366;
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -787,21 +846,61 @@ body {
     text-decoration: none;
 }
 
-/* Efeito ao passar o mouse */
+/* O CÍRCULO DA ONDA (Ajustado para o novo tamanho) */
+.whatsapp-float::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: #25D366;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: pulse-ripple 1.5s infinite ease-out;
+}
+
+@keyframes pulse-ripple {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(2.0); /* Reduzi um pouco a explosão para não ocupar a tela toda */
+        opacity: 0;
+    }
+}
+
 .whatsapp-float:hover {
-    background-color: #128C7E; /* Verde mais escuro */
-    transform: scale(1.1) translateY(-3px); /* Cresce e sobe um pouquinho */
-    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+    background-color: #128C7E;
+    transform: translateY(-3px);
 }
 
-/* Ícone dentro do botão */
+.whatsapp-float:hover::before {
+    animation: none;
+}
+
+/* Ícone dentro do botão (Também aumentei) */
 .whatsapp-float svg {
-    width: 35px;
-    height: 35px;
-    fill: white; /* Garante que o ícone seja branco */
+    width: 40px;
+    height: 40px;
+    fill: white;
 }
 
-/* RESPONSIVO (Ajuste para celulares) */
+/* RESPONSIVO (No celular, mantemos um pouco menor para não tapar o conteúdo) */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px; /* No celular, volta para o canto para não atrapalhar a leitura */
+    }
+    .whatsapp-float svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* RESPONSIVO */
 @media (max-width: 768px) {
     .whatsapp-float {
         width: 50px;
@@ -809,7 +908,6 @@ body {
         bottom: 20px;
         right: 20px;
     }
-    
     .whatsapp-float svg {
         width: 28px;
         height: 28px;
