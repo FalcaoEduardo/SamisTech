@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SamisTech - Criação de sites profissionais com custo zero de entrada.">
+    <title>SamisTech | Conectando sua presença digital</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo.jpg" alt="Logo SamisTech">
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#servicos">Como Funciona</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#contato" class="btn-destaque">Fale Conosco</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Conectando você aos seus <span class="highlight">clientes</span>.</h1>
+                <p>Tenha um site profissional, rápido e seguro para o seu negócio sem descapitalizar. Tecnologia de ponta com mensalidade acessível.</p>
+                <div class="hero-buttons">
+                    <a href="#contato" class="btn btn-primary">Quero meu site</a>
+                    <a href="#servicos" class="btn btn-outline">Saiba mais</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Tecnologia Web">
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>O Digital Descomplicado</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Focamos na tecnologia para você focar no seu negócio.</p>
+            </div>
+            
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>Zero Custo Inicial</h3>
+                    <p>Lorem ipsum dolor sit amet. Diferente das agências, nós investimos na criação do seu site. Você não paga nada para começar.</p>
+                </div>
+                <div class="card">
+                    <h3>Tecnologia Nuvem</h3>
+                    <p>Utilizamos servidores estáticos de alta performance. Seu site carrega em milissegundos e nunca sai do ar.</p>
+                </div>
+                <div class="card">
+                    <h3>Suporte Contínuo</h3>
+                    <p>Sed do eiusmod tempor incididunt ut labore. Cuidamos de domínios, SSL e atualizações para você.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos" class="section bg-light">
+        <div class="container">
+            <div class="pricing-card">
+                <span class="badge">OFERTA DE LANÇAMENTO</span>
+                <h3>Plano Profissional</h3>
+                <div class="price">
+                    <span class="currency">R$</span>
+                    <span class="value">89,90</span>
+                    <span class="period">/mês</span>
+                </div>
+                <ul class="features">
+                    <li>✅ Criação do Site Inclusa</li>
+                    <li>✅ Hospedagem Premium</li>
+                    <li>✅ Domínio Grátis (.com.br)</li>
+                    <li>✅ Certificado de Segurança (SSL)</li>
+                    <li>✅ Suporte via WhatsApp</li>
+                </ul>
+                <a href="#contato" class="btn btn-primary">Assinar Agora</a>
+                <p class="disclaimer">*Fidelidade mínima de 12 meses.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section">
+        <div class="container contact-wrapper">
+            <div class="contact-text">
+                <h2>Vamos conectar sua empresa?</h2>
+                <p>Preencha o formulário e entraremos em contato para iniciar seu projeto ainda hoje.</p>
+                <p><strong>WhatsApp:</strong> (11) 99999-9999</p>
+                <p><strong>Email:</strong> contato@samistech.com.br</p>
+            </div>
+
+            <form class="contact-form" name="contato" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="contato">
+                
+                <div class="form-group">
+                    <label for="nome">Nome da Empresa</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: Escritório Silva" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail Profissional</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensagem">Como podemos ajudar?</label>
+                    <textarea id="mensagem" name="mensagem" rows="4" placeholder="Gostaria de saber mais sobre..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Solicitar Contato</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SamisTech. Todos os direitos reservados.</p>
+            <p class="slogan-footer">Conectando sua presença digital</p>
+        </div>
+    </footer>
+
+</body>
+</html>
