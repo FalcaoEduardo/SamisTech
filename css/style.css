@@ -765,3 +765,53 @@ body {
     .cta-content h2 { font-size: 2rem; }
     .btn-whatsapp, .btn-instagram { width: 100%; padding: 15px; }
 }
+/* =================================================================
+   BOTÃO FLUTUANTE WHATSAPP
+   ================================================================= */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366; /* Verde Oficial */
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000; /* Garante que fique acima de tudo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Efeito ao passar o mouse */
+.whatsapp-float:hover {
+    background-color: #128C7E; /* Verde mais escuro */
+    transform: scale(1.1) translateY(-3px); /* Cresce e sobe um pouquinho */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+}
+
+/* Ícone dentro do botão */
+.whatsapp-float svg {
+    width: 35px;
+    height: 35px;
+    fill: white; /* Garante que o ícone seja branco */
+}
+
+/* RESPONSIVO (Ajuste para celulares) */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+    }
+}
