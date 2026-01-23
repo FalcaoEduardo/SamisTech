@@ -913,3 +913,12 @@ body {
         height: 28px;
     }
 }
+.setup-fee {
+    background-color: #f0f8ff; /* Azul bem clarinho */
+    color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    border: 1px dashed var(--primary-color);
+}
