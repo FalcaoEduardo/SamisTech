@@ -1,43 +1,33 @@
 /* =================================================================
     RESET E VARIÁVEIS GLOBAIS
-    Define as cores da SamisTech e limpa formatações padrão
     =================================================================
 */
 :root {
-    /* Cores extraídas do Logo */
-    --primary-color: #00AEEF; /* Azul Ciano Vibrante */
-    --secondary-color: #404041; /* Cinza Chumbo/Escuro */
-    --accent-color: #f4f4f4;    /* Cinza Claro para fundos */
+    --primary-color: #00AEEF;   /* Azul Ciano (Identidade) */
+    --dark-bg: #0b0d10;         /* Preto Tech */
+    --card-bg: #ffffff;         /* Branco Padrão */
+    --secondary-color: #404041; /* Cinza Escuro */
+    --accent-color: #f4f4f4;    /* Cinza Claro (Fundos) */
     --white: #ffffff;
     --text-color: #333333;
     
-    /* Fontes e Tamanhos */
     --font-main: 'Montserrat', sans-serif;
-    --max-width: 1100px; /* Largura máxima do conteúdo */
+    --max-width: 1100px;
 }
 
-/* Adicione logo no início do arquivo, antes ou depois do :root */
-
 html {
-    /* Isso cria uma "margem de segurança" invisível no topo */
-    /* Quando clicar no menu, o site vai parar 70px ANTES do conteúdo */
-    scroll-padding-top: 70px; 
-    
+    scroll-padding-top: 80px; /* Compensa o header fixo */
     scroll-behavior: smooth;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: var(--font-main);
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--white);
-    scroll-behavior: smooth; /* Rolagem suave ao clicar no menu */
+    overflow-x: hidden; /* Evita rolagem lateral indesejada */
 }
 
 /* Utilitários */
@@ -48,53 +38,13 @@ body {
     width: 100%;
 }
 
-.highlight {
-    color: var(--primary-color);
-}
-
-/* =================================================================
-    BOTÕES
-    Estilos reutilizáveis para botões
-    =================================================================
-*/
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: 0.3s;
-    cursor: pointer;
-    border: none;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
-.btn-primary:hover {
-    background-color: #008cbf; /* Um azul um pouco mais escuro */
-}
-
-.btn-outline {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    margin-left: 10px;
-}
-
-.btn-outline:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
 /* =================================================================
     HEADER & NAV
     =================================================================
 */
 .header {
     background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     position: fixed;
     width: 100%;
     top: 0;
@@ -111,9 +61,9 @@ body {
 }
 
 .logo img {
-    height: 70px; /* Aumentei de 50 para 75px */
+    height: 60px;
     width: auto;
-    display: block; /* Garante que não pegue espaçamento estranho de texto */
+    display: block;
 }
 
 .nav ul {
@@ -122,20 +72,17 @@ body {
     align-items: center;
 }
 
-.nav ul li {
-    margin-left: 20px;
-}
+.nav ul li { margin-left: 20px; }
 
 .nav ul li a {
     text-decoration: none;
     color: var(--secondary-color);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.95rem;
     transition: 0.3s;
 }
 
-.nav ul li a:hover {
-    color: var(--primary-color);
-}
+.nav ul li a:hover { color: var(--primary-color); }
 
 .btn-destaque {
     padding: 8px 20px;
@@ -145,99 +92,172 @@ body {
 }
 
 /* =================================================================
-    HERO SECTION
+    HERO SECTION (DARK MODE / TECH)
     =================================================================
 */
 .hero {
-    margin-top: 70px; /* Espaço para o header fixo não cobrir */
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f9f9f9 0%, #eef2f3 100%);
+    margin-top: 70px;
+    padding: 60px 0 100px 0;
+    background: radial-gradient(circle at 70% 30%, #1a252f 0%, #0b0d10 80%);
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow Azul no Fundo */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: var(--primary-color);
+    filter: blur(150px);
+    opacity: 0.15;
+    border-radius: 50%;
+    z-index: 0;
 }
 
 .hero .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Para mobile */
+    position: relative;
+    z-index: 1;
+    display: grid;
+    /* Configuração: Texto Largo (1.4) + Imagem (1.1) */
+    grid-template-columns: 1.4fr 1.1fr; 
+    align-items: flex-start; 
+    gap: 20px;
 }
 
+/* Coluna de Texto */
 .hero-content {
-    flex: 1;
-    min-width: 300px;
-    padding-right: 20px;
+    margin-top: 20px;
+    width: 100%; 
 }
 
 .hero-content h1 {
-    font-size: 2.5rem;
-    color: var(--secondary-color);
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--white);
     margin-bottom: 20px;
-    line-height: 1.2;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    white-space: normal; 
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #00AEEF 0%, #00ff88 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .hero-content p {
     font-size: 1.1rem;
     margin-bottom: 30px;
-    color: #666;
+    color: #b0b0b0;
+    max-width: 600px;
 }
 
-.hero-image {
-    flex: 1;
-    min-width: 300px;
-}
-
-.hero-image img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* =================================================================
-   CHECKLIST DE VANTAGENS (HERO)
-   ================================================================= */
 .hero-benefits {
-    list-style: none; /* Remove as bolinhas padrão */
-    margin-top: 35px; /* Distância dos botões */
+    list-style: none;
+    margin-top: 35px;
 }
 
 .hero-benefits li {
     display: flex;
-    align-items: center; /* Alinha o ícone com o texto */
-    margin-bottom: 12px; /* Espaço entre os itens */
+    align-items: center;
+    margin-bottom: 12px;
     font-size: 1rem;
-    color: var(--secondary-color);
+    color: #ddd;
     font-weight: 500;
 }
 
-/* Estilo do Vzinho Verde */
 .hero-benefits .check {
-    color: #25D366; /* Verde vibrante (Sucesso) */
-    font-size: 1.2rem;
-    margin-right: 12px; /* Espaço entre o V e o texto */
+    color: #25D366;
+    margin-right: 8px;
     font-weight: bold;
-    
-    /* Opcional: Um círculo verde clarinho em volta */
-    background: rgba(37, 211, 102, 0.1);
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+    font-size: 1.2rem;
 }
+
+/* Coluna de Imagem */
+.hero-image {
+    display: flex;
+    justify-content: flex-end;
+    perspective: 1000px;
+    margin-top: 130px; /* Altura do degrau */
+    margin-right: -80px; /* Puxada para direita */
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 750px; 
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 174, 239, 0.25);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* =================================================================
+    BOTÕES GERAIS
+    =================================================================
+*/
+.btn {
+    display: inline-block;
+    padding: 14px 35px;
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 174, 239, 0.6);
+    background-color: #009ecd;
+}
+
+.btn-sm {
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background-color: rgba(0, 174, 239, 0.08);
+    color: var(--primary-color);
+}
+
+.btn-sm:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 5px 15px rgba(0, 174, 239, 0.3);
+}
+
+.btn-full { width: 100%; }
 
 /* =================================================================
     SEÇÕES GERAIS
     =================================================================
 */
-.section {
-    padding: 80px 0;
-}
-
-.bg-light {
-    background-color: var(--accent-color);
-}
+.section { padding: 80px 0; }
+.bg-light { background-color: var(--accent-color); }
 
 .section-header {
     text-align: center;
@@ -245,12 +265,15 @@ body {
 }
 
 .section-header h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--secondary-color);
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
-/* Cards Grid */
+.section-header p { color: #666; max-width: 700px; margin: 0 auto; }
+
+/* Grid Cards (Brancos) */
 .grid-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -260,23 +283,126 @@ body {
 .card {
     background: var(--white);
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     transition: 0.3s;
-    border-top: 4px solid var(--primary-color); /* Detalhe tech */
+    border-top: 4px solid var(--primary-color);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h3 {
-    margin-bottom: 15px;
-    color: var(--secondary-color);
-}
+.card:hover { transform: translateY(-5px); }
+.card h3 { margin-bottom: 15px; color: var(--secondary-color); }
 
 /* =================================================================
-    CARD DE PREÇO (DESTAQUE)
+    SEÇÃO TECNOLOGIA (DARK GRID)
+    =================================================================
+*/
+.bg-dark {
+    background-color: var(--dark-bg);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.tech-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.tech-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 174, 239, 0.1);
+}
+
+.tech-card h3 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tech-icon { font-size: 1.5rem; }
+.tech-card p { color: #888; font-size: 0.9rem; }
+
+/* =================================================================
+    CARROSSEL / PORTFÓLIO
+    =================================================================
+*/
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 540px;
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0 50px 10px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-container::after { content: ""; min-width: 20px; height: 1px; display: block; }
+
+.project-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 500px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    transition: transform 0.3s;
+}
+
+.project-card:hover { transform: translateY(-5px); }
+
+.project-image { height: 220px; overflow: hidden; }
+.project-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.project-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+.project-info h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--secondary-color); }
+.project-info p { font-size: 0.9rem; color: #666; margin-bottom: 20px; flex-grow: 1; }
+
+/* Setas */
+.nav-btn {
+    position: absolute;
+    background: var(--white);
+    color: var(--primary-color);
+    border: none;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.3s;
+}
+
+.nav-btn:hover { background: var(--primary-color); color: var(--white); }
+.nav-btn.hidden { opacity: 0; pointer-events: none; }
+.prev-btn { left: -25px; }
+.next-btn { right: -25px; }
+
+/* =================================================================
+    PREÇOS
     =================================================================
 */
 .pricing-card {
@@ -284,9 +410,9 @@ body {
     max-width: 400px;
     margin: 0 auto;
     padding: 40px;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
     position: relative;
     border: 1px solid #eee;
 }
@@ -294,542 +420,98 @@ body {
 .badge {
     background: var(--primary-color);
     color: white;
-    padding: 5px 15px;
+    padding: 6px 18px;
     border-radius: 20px;
     font-size: 0.8rem;
-    text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 700;
     position: absolute;
-    top: -15px;
-    left: 50%;
+    top: -15px; left: 50%;
     transform: translateX(-50%);
 }
 
-.price {
-    margin: 20px 0;
+.price .value { font-size: 3.5rem; font-weight: 800; color: var(--secondary-color); }
+.price .currency { font-size: 1.5rem; font-weight: 600; vertical-align: top; }
+.price .period { color: #999; }
+
+.setup-fee {
+    background-color: #f0f8ff;
     color: var(--secondary-color);
-}
-
-.price .value {
-    font-size: 3.5rem;
-    font-weight: 700;
-}
-
-.features {
-    list-style: none;
-    margin: 30px 0;
-    text-align: left;
-}
-
-.features li {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
-.disclaimer {
-    font-size: 0.8rem;
-    color: #999;
-    margin-top: 15px;
-}
-
-/* =================================================================
-    CONTATO & FORM
-    =================================================================
-*/
-.contact-wrapper {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-
-.contact-text, .contact-form {
-    flex: 1;
-    min-width: 300px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
+    padding: 10px;
     border-radius: 5px;
-    font-family: inherit;
-}
-
-.btn-full {
-    width: 100%;
-}
-
-/* =================================================================
-    FOOTER (RODAPÉ) - CORRIGIDO (SEM LINHA BRANCA)
-    =================================================================
-*/
-.footer {
-    background-color: var(--secondary-color);
-    color: var(--white);
-    text-align: center;
-    padding: 30px 0;
-    
-    /* CORREÇÃO DA LINHA BRANCA: */
-    margin: 0;           /* Garante que não tenha margem externa */
-    overflow: hidden;    /* Impede que qualquer conteúdo interno "vaze" para fora */
-    width: 100%;         /* Garante largura total */
-    position: relative;  /* Fixa o posicionamento */
-}
-
-/* Garante que os textos dentro do rodapé não tenham margem sobrando */
-.footer p {
-    margin-bottom: 5px; /* Pequeno espaço entre as linhas de texto */
-    padding: 0;
-}
-
-/* Remove a margem do ÚLTIMO item para ele não empurrar o fundo */
-.footer p:last-child {
-    margin-bottom: 0;
-}
-
-.slogan-footer {
-    font-size: 0.9rem;
-    opacity: 0.7;
-    /* margin-top removido e controlado pelo p acima para evitar bugs */
-}
-
-.slogan-footer {
-    font-size: 0.9rem;
-    opacity: 0.7;
-    margin-top: 5px;
-}
-
-/* =================================================================
-    RESPONSIVO (CELULAR)
-    =================================================================
-*/
-@media (max-width: 768px) {
-    .nav {
-        display: none; /* Em um site real, faríamos um menu hambúrguer aqui */
-    }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .pricing-card {
-        padding: 20px;
-    }
-}
-/* =================================================================
-   CARROSSEL PADRONIZADO (ATUALIZADO)
-   ================================================================= */
-
-/* Wrapper para posicionar os botões */
-.carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-/* Atualize este bloco */
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 30px;
-    
-    /* MUDANÇA AQUI: Topo 40px, Direita 0, Baixo 40px, Esquerda 40px */
-    padding: 40px 0 40px 40px; 
-    
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    z-index: 1;
-}
-
-/* Esconder barra de rolagem */
-.carousel-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* =================================================================
-   SEÇÃO CARROSSEL / PORTFÓLIO (CORRIGIDO FINAL)
-   ================================================================= */
-
-/* Wrapper para posicionar os botões relativos a ele */
-.carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    /* Garante que o wrapper tenha altura para centralizar os botões */
-    min-height: 520px; 
-}
-
-/* Container de rolagem (ATUALIZADO) */
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    
-    /* Topo: 40px | Direita: 0 (ZERO) | Baixo: 40px | Esquerda: 40px */
-    /* Deixamos a direita zerada porque o elemento fantasma vai cuidar disso */
-    padding: 20px 0 50px 10px; 
-    
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    z-index: 1;
-}
-
-/* O "ELEMENTO FANTASMA" (A Solução Definitiva) */
-/* Isso cria um bloco invisível no final da lista que obriga o scroll a ir até o fim */
-.carousel-container::after {
-    content: "";
-    display: block;
-    min-width: 40px; /* A largura do respiro final */
-    height: 10px;    /* Altura qualquer, não importa */
-    pointer-events: none; /* Garante que não atrapalhe cliques */
-}
-
-/* Esconder barra de rolagem (Chrome/Safari) */
-.carousel-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* =================================================================
-   BOTÕES DE NAVEGAÇÃO (AS SETAS LATERAIS)
-   ================================================================= */
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: var(--white);
-    color: var(--primary-color);
-    border: none;
-    width: 50px;  /* Um pouco maior para clicar fácil */
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra mais forte para destacar */
-    cursor: pointer;
-    z-index: 100; /* Z-INDEX ALTO: Garante que fique na frente de tudo */
-    font-size: 1.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.1s ease;
-}
-
-.nav-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-50%) scale(1.15); /* Cresce mais ao passar o mouse */
-    box-shadow: 0 8px 20px rgba(0, 174, 239, 0.4); /* Glow azul na sombra */
-}
-
-/* Adicione logo abaixo do bloco .nav-btn:hover no seu CSS */
-
-.nav-btn.hidden {
-    opacity: 0;
-    pointer-events: none; /* Impede clicar quando estiver invisível */
-    transform: translateY(-50%) scale(0.5); /* Efeito de encolher ao sumir */
-}
-
-/* Posicionamento fino */
-.prev-btn { left: -37px; }
-.next-btn { right: -47px; }
-
-/* =================================================================
-   O CARD DO PROJETO
-   ================================================================= */
-.project-card {
-    min-width: 340px; 
-    max-width: 340px;
-    height: 520px; /* Altura fixa */
-    background: var(--white);
-    border-radius: 12px;
-    border: 1px solid #eee;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    scroll-snap-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Para o z-index funcionar direito */
-    z-index: 2;
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-}
-
-/* IMAGEM */
-.project-image {
-    width: 100%;
-    height: 230px;
-    flex-shrink: 0;
-}
-
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.5s;
-}
-
-.project-card:hover .project-image img {
-    transform: scale(1.08); /* Zoom mais suave */
-}
-
-/* ÁREA DE CONTEÚDO */
-.project-info {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.project-info h3 {
-    font-size: 1.3rem;
-    color: var(--secondary-color);
-    margin-bottom: 12px;
-    font-weight: 700;
-}
-
-.project-info p {
-    font-size: 0.95rem;
-    color: #777;
-    line-height: 1.5;
     margin-bottom: 20px;
-    /* Limita o texto a 3 linhas */
-    display: -webkit-box;
-    -webkit-line-clamp: 3; 
-    -webkit-box-orient: vertical;
-    overflow: hidden; 
-}
-
-/* =================================================================
-   NOVO DESIGN DO BOTÃO "VER PROJETO"
-   ================================================================= */
-/* Note que removi a classe .btn-outline do HTML e estou estilizando direto aqui */
-.project-info .btn-sm {
-    margin-top: auto; /* Mantém o botão sempre no rodapé do card */
-    padding: 14px 0;
-    width: 100%;
-    text-align: center;
-    font-weight: 600;
     font-size: 0.9rem;
-    border-radius: 8px;
-    
-    /* NOVO ESTILO: Fundo azul bem clarinho (transparente) */
-    background-color: rgba(0, 174, 239, 0.08); 
-    color: var(--primary-color);
-    border: none; /* Sem borda */
-    transition: all 0.3s ease;
+    border: 1px dashed var(--primary-color);
+    font-weight: 500;
 }
 
-.project-info .btn-sm:hover {
-    /* Ao passar o mouse, fica sólido */
-    background-color: var(--primary-color);
-    color: var(--white);
-    box-shadow: 0 5px 15px rgba(0, 174, 239, 0.3); /* Sombra azulada */
-    transform: translateY(-2px);
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-    .nav-btn { display: none; } /* Esconde setas no celular */
-    .carousel-wrapper { min-height: auto; }
-    .project-card {
-        min-width: 300px;
-        max-width: 300px;
-    }
-}
-/* =================================================================
-   CONTATO DARK (FULL WIDTH / RODAPÉ)
-   ================================================================= */
+.features { list-style: none; margin: 30px 0; text-align: left; }
+.features li { margin-bottom: 12px; border-bottom: 1px solid #f9f9f9; padding-bottom: 8px; }
 
 /* =================================================================
-   CONTATO DARK (Ajuste de Altura)
-   ================================================================= */
-
+    CONTATO & RODAPÉ
+    =================================================================
+*/
 .cta-section {
-    width: 100%;
-    
-    /* ALTERE AQUI: De 100px para 160px (ou mais, se quiser maior) */
-    padding: 390px 0; 
-    
+    padding: 120px 0;
     text-align: center;
     color: var(--white);
-    
-    /* (Mantenha o resto das propriedades de background como estão...) */
-    background: linear-gradient(rgba(12, 20, 35, 0.92), rgba(12, 20, 35, 0.92)), 
+    background: linear-gradient(rgba(11, 13, 16, 0.9), rgba(11, 13, 16, 0.95)), 
                 url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80');
     background-size: cover;
-    background-position: center;
     background-attachment: fixed;
-    margin: 0;
-    border-radius: 0; 
 }
 
-/* O conteúdo continua centralizado e limitado para leitura */
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-}
+.cta-content h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--white); }
+.text-highlight { color: var(--primary-color); }
 
-.cta-content h2 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    text-transform: uppercase;
-}
-
-.text-highlight {
-    color: var(--primary-color); 
-}
-
-.cta-content p {
-    font-size: 1.1rem;
-    color: #cccccc;
-    margin-bottom: 50px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* CONTAINER DOS BOTÕES */
 .contact-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
+    margin-top: 40px;
     flex-wrap: wrap;
 }
 
-/* ESTILO DOS BOTÕES (Mantido o design arredondado) */
-.btn-whatsapp, .btn-instagram {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: 18px 45px;
-    border-radius: 50px;
-    min-width: 280px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.icon { font-size: 1.3rem; }
-
-/* Cores WhatsApp */
 .btn-whatsapp {
-    background-color: #00a884;
-    border: 2px solid #00a884;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
 }
 
-.btn-whatsapp:hover {
-    background-color: #008f70;
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 168, 132, 0.4);
-}
-
-/* Cores Instagram (Outline Branco) */
 .btn-instagram {
     background: transparent;
     border: 2px solid var(--white);
-}
-
-.btn-instagram:hover {
-    background: var(--white);
-    color: var(--secondary-color);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-    .cta-content h2 { font-size: 2rem; }
-    .btn-whatsapp, .btn-instagram { width: 100%; padding: 15px; }
-}
-/* =================================================================
-   BOTÃO FLUTUANTE WHATSAPP (COM ANIMAÇÃO DE ONDAS)
-   ================================================================= */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366; /* Verde Oficial */
-    color: #FFF;
-    border-radius: 50%;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+    color: var(--white);
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-weight: 700;
     text-decoration: none;
-    
-    /* Importante para centralizar a onda */
-    position: fixed; 
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: 0.3s;
 }
 
-/* O CÍRCULO DA ONDA (Pseudo-elemento) */
-/* Isso cria um círculo invisível atrás do botão */
-.whatsapp-float::before {
-    content: '';
-    position: absolute;
-    z-index: -1; /* Fica atrás do botão principal */
-    width: 100%;
-    height: 100%;
-    background-color: #25D366; /* Mesma cor do botão */
-    border-radius: 50%;
-    opacity: 0.7;
-    
-    /* Aplica a animação criada abaixo */
-    /* Nome | Duração | Repetição | Curva de velocidade */
-    animation: pulse-ripple 1.5s infinite ease-out;
-}
+.btn-instagram:hover { background: var(--white); color: var(--secondary-color); }
 
-/* A ANIMAÇÃO EM SI (Keyframes) */
-@keyframes pulse-ripple {
-    0% {
-        transform: scale(1); /* Começa do tamanho normal */
-        opacity: 0.7;        /* Meio transparente */
-    }
-    100% {
-        transform: scale(2.5); /* Cresce até 2.5x o tamanho */
-        opacity: 0;            /* Fica totalmente transparente no final */
-    }
+.footer {
+    background-color: #050608;
+    color: #666;
+    text-align: center;
+    padding: 30px 0;
 }
 
 /* =================================================================
-   BOTÃO FLUTUANTE WHATSAPP (MAIOR E MAIS PARA A ESQUERDA)
+   BOTÃO FLUTUANTE WHATSAPP (REFATORADO)
    ================================================================= */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
     
-    /* MUDANÇA AQUI: Afastado aprox. 2-3cm da borda direita */
+    /* Configuração Personalizada: Afastado e Maior */
     right: 100px; 
-    
-    /* MUDANÇA AQUI: Botão bem maior */
     width: 72px;
     height: 72px;
     
@@ -846,7 +528,18 @@ body {
     text-decoration: none;
 }
 
-/* O CÍRCULO DA ONDA (Ajustado para o novo tamanho) */
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: translateY(-3px);
+}
+
+.whatsapp-float svg {
+    width: 40px;
+    height: 40px;
+    fill: white;
+}
+
+/* Animação de Onda */
 .whatsapp-float::before {
     content: '';
     position: absolute;
@@ -860,65 +553,54 @@ body {
 }
 
 @keyframes pulse-ripple {
-    0% {
-        transform: scale(1);
-        opacity: 0.7;
-    }
-    100% {
-        transform: scale(2.0); /* Reduzi um pouco a explosão para não ocupar a tela toda */
-        opacity: 0;
-    }
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(2.0); opacity: 0; }
 }
 
-.whatsapp-float:hover {
-    background-color: #128C7E;
-    transform: translateY(-3px);
-}
-
-.whatsapp-float:hover::before {
-    animation: none;
-}
-
-/* Ícone dentro do botão (Também aumentei) */
-.whatsapp-float svg {
-    width: 40px;
-    height: 40px;
-    fill: white;
-}
-
-/* RESPONSIVO (No celular, mantemos um pouco menor para não tapar o conteúdo) */
+/* =================================================================
+    RESPONSIVO (CELULAR) - TODAS AS REGRAS AQUI NO FINAL
+    =================================================================
+*/
 @media (max-width: 768px) {
+    /* Menu e Header */
+    .nav { display: none; }
+    
+    /* Hero Ajustado */
+    .hero { padding: 40px 0; }
+    .hero .container {
+        grid-template-columns: 1fr; /* Volta para 1 coluna */
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .hero-content h1 { font-size: 2.2rem; }
+    .hero-content p { margin: 0 auto 30px auto; }
+    .hero-benefits li { justify-content: center; }
+
+    /* Imagem abaixo do texto no celular */
+    .hero-image {
+        margin-top: 20px; 
+        margin-right: 0; /* Remove a margem negativa lateral */
+        justify-content: center;
+        order: 2; /* Joga para baixo */
+    }
+    .hero-image img { max-width: 90%; }
+    
+    /* Preços e Carrossel */
+    .pricing-card { padding: 25px; }
+    .price .value { font-size: 3rem; }
+    .nav-btn { display: none; }
+    .carousel-container { padding-right: 20px; }
+
+    /* Botão WhatsApp Menor e no Canto (Melhor usabilidade no celular) */
     .whatsapp-float {
         width: 60px;
         height: 60px;
         bottom: 20px;
-        right: 20px; /* No celular, volta para o canto para não atrapalhar a leitura */
+        right: 20px; /* Volta para o canto padrão */
     }
     .whatsapp-float svg {
         width: 32px;
         height: 32px;
     }
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-    }
-    .whatsapp-float svg {
-        width: 28px;
-        height: 28px;
-    }
-}
-.setup-fee {
-    background-color: #f0f8ff; /* Azul bem clarinho */
-    color: var(--secondary-color);
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    border: 1px dashed var(--primary-color);
 }
