@@ -186,7 +186,7 @@ body {
     display: flex;
     justify-content: flex-end;
     perspective: 1000px;
-    margin-top: 130px; /* Altura do degrau */
+    margin-top: 60px; /* Altura do degrau */
     margin-right: -80px; /* Puxada para direita */
 }
 
@@ -195,8 +195,8 @@ body {
     max-width: 750px; 
     height: auto;
     border-radius: 20px;
-    box-shadow: 0 25px 60px rgba(0, 174, 239, 0.25);
-    animation: float 6s ease-in-out infinite;
+    
+    
 }
 
 @keyframes float {
