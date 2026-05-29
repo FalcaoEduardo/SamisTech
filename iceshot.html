@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore de Progressão - PoE2</title>
+    <style>
+        body {
+            background-color: #1a1a24;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 30px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #b0b0d0;
+            margin-bottom: 40px;
+        }
+        .timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .level-block {
+            background-color: #2b2b3c;
+            border: 1px solid #3d3d52;
+            border-left: 5px solid #d0a85c;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .level-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #d0a85c;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #4a4a65;
+            padding-bottom: 10px;
+        }
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 15px;
+        }
+        .skill-item {
+            background-color: #20202d;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .skill-name {
+            font-weight: bold;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #3d3d52;
+            padding-bottom: 5px;
+        }
+        .skill-new {
+            color: #4ade80;
+            font-size: 0.85rem;
+            margin-left: 8px;
+            font-style: italic;
+        }
+        .support-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .support-item {
+            background-color: #1a1a24;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border-left: 3px solid #4a4a65;
+            font-size: 0.9rem;
+            color: #b0b0d0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .support-item.upgrade {
+            border-left-color: #4ade80;
+            color: #ffffff;
+        }
+        .upgrade-badge {
+            color: #4ade80;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+        .tier {
+            color: #7da588;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .tier-high {
+            color: #d0a85c;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .no-support {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Progressão de Setup por Nível</h1>
+
+    <div class="timeline">
+
+        <!-- Lvl 1-14 -->
+        <div class="level-block">
+            <h2 class="level-title">Lvl 1 - 14 (Início)</h2>
+            <div class="skill-grid">
+                <div class="skill-item">
+                    <span class="skill-name">Lightning Arrow</span>
+                    <div class="support-list">
+                        <div class="support-item">Rapid Attacks I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Lightning Rod</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Herald of Thunder</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item"><span class="skill-name">Frost Bomb</span><span class="no-support">Sem suportes</span></div>
+                <div class="skill-item"><span class="skill-name">Barrage</span><span class="no-support">Sem suportes</span></div>
+                <div class="skill-item"><span class="skill-name">Ice-Tipped Arrows</span><span class="no-support">Sem suportes</span></div>
+                <div class="skill-item"><span class="skill-name">Pounce</span><span class="no-support">Sem suportes</span></div>
+            </div>
+        </div>
+
+        <!-- Lvl 15-23 -->
+        <div class="level-block">
+            <h2 class="level-title">Lvl 15 - 23</h2>
+            <div class="skill-grid">
+                <div class="skill-item">
+                    <span class="skill-name">Lightning Arrow</span>
+                    <div class="support-list">
+                        <div class="support-item">Rapid Attacks I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Lightning Rod</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Herald of Thunder</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Ice-Tipped Arrows</span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Magnified Area I <span class="tier">[Tier 1]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item"><span class="skill-name">Frost Bomb</span><span class="no-support">Sem suportes</span></div>
+                <div class="skill-item"><span class="skill-name">Barrage</span><span class="no-support">Sem suportes</span></div>
+                <div class="skill-item"><span class="skill-name">Pounce</span><span class="no-support">Sem suportes</span></div>
+            </div>
+        </div>
+
+        <!-- Lvl 24-30 -->
+        <div class="level-block">
+            <h2 class="level-title">Lvl 24 - 30 (Transição)</h2>
+            <div class="skill-grid">
+                <div class="skill-item">
+                    <span class="skill-name">Lightning Arrow</span>
+                    <div class="support-list">
+                        <div class="support-item">Rapid Attacks I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Snipe <span class="skill-new">(Nova)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Concentrated Area <span class="tier">[Tier 1]</span></span></div>
+                        <div class="support-item upgrade"><span>Window of Opportunity I <span class="tier">[Tier 1]</span></span></div>
+                        <div class="support-item upgrade"><span>Elemental Armament II <span class="tier-high">[Tier 2]</span></span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Freezing Mark <span class="skill-new">(Nova)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Prolonged Duration I <span class="tier">[Tier 1]</span></span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Herald of Thunder</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Ice-Tipped Arrows</span>
+                    <div class="support-list">
+                        <div class="support-item">Magnified Area I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item upgrade"><span>Elemental Armament I <span class="tier">[Tier 1]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Freezing Salvo <span class="skill-new">(Nova)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Freeze <span class="tier-high">[Tier 2]</span></span></div>
+                        <div class="support-item upgrade"><span>Concentrated Area <span class="tier">[Tier 1]</span></span></div>
+                    </div>
+                </div>
+                <div class="skill-item"><span class="skill-name">Barrage</span><span class="no-support">Sem suportes</span></div>
+                <div class="skill-item"><span class="skill-name">Frost Bomb</span><span class="no-support">Sem suportes</span></div>
+            </div>
+        </div>
+
+        <!-- Lvl 31-41 -->
+        <div class="level-block">
+            <h2 class="level-title">Lvl 31 - 41</h2>
+            <div class="skill-grid">
+                <div class="skill-item">
+                    <span class="skill-name">Ice Shot <span class="skill-new">(Substitui Lightning Arrow)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Rapid Attacks I <span class="tier">[Tier 1]</span></span></div>
+                        <div class="support-item upgrade"><span>Elemental Armament II <span class="tier-high">[Tier 2]</span></span></div>
+                        <div class="support-item upgrade"><span>Ice Bite I <span class="tier">[Tier 1]</span></span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Snipe</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Window of Opportunity I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament II <span class="tier-high">[Tier 2]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Freezing Mark</span>
+                    <div class="support-list">
+                        <div class="support-item">Prolonged Duration I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item upgrade"><span>Mark of Siphoning <span class="tier">[Tier 1]</span></span> <span class="upgrade-badge">Novo</span></div>
+                        <div class="support-item upgrade"><span>Eternal Mark <span class="tier-high">[Tier 3]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Herald of Ice <span class="skill-new">(Substitui Herald of Thunder)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Magnified Area I <span class="tier">[Tier 1]</span></span></div>
+                        <div class="support-item upgrade"><span>Elemental Armament II <span class="tier-high">[Tier 2]</span></span></div>
+                        <div class="support-item upgrade"><span>Elemental Focus <span class="tier-high">[Tier 3]</span></span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Barrage</span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Cooldown Recovery I <span class="tier-high">[Tier 3]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Ice-Tipped Arrows</span>
+                    <div class="support-list">
+                        <div class="support-item">Magnified Area I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item upgrade"><span>Elemental Armament II <span class="tier-high">[Tier 2]</span></span> <span class="upgrade-badge">Tier Up</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Freezing Salvo</span>
+                    <div class="support-list">
+                        <div class="support-item">Freeze <span class="tier-high">[Tier 2]</span></div>
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item"><span class="skill-name">Combat Frenzy <span class="skill-new">(Nova)</span></span><span class="no-support">Sem suportes</span></div>
+            </div>
+        </div>
+
+        <!-- Lvl 42+ -->
+        <div class="level-block">
+            <h2 class="level-title">Lvl 42 - 60+ (Setup Final)</h2>
+            <div class="skill-grid">
+                <div class="skill-item">
+                    <span class="skill-name">Ice Shot</span>
+                    <div class="support-list">
+                        <div class="support-item">Rapid Attacks I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament II <span class="tier-high">[Tier 2]</span></div>
+                        <div class="support-item upgrade"><span>Ice Bite II <span class="tier-high">[Tier 3]</span></span> <span class="upgrade-badge">Tier Up</span></div>
+                        <div class="support-item upgrade"><span>Fork <span class="tier-high">[Tier 3]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Snipe</span>
+                    <div class="support-list">
+                        <div class="support-item">Concentrated Area <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Window of Opportunity I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament II <span class="tier-high">[Tier 2]</span></div>
+                        <div class="support-item upgrade"><span>Elemental Focus <span class="tier-high">[Tier 3]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Freezing Mark</span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Charged Mark <span class="tier-high">[Tier 5]</span></span> <span class="upgrade-badge">Novo</span></div>
+                        <div class="support-item upgrade"><span>Prolonged Duration II <span class="tier-high">[Tier 3]</span></span> <span class="upgrade-badge">Tier Up</span></div>
+                        <div class="support-item">Eternal Mark <span class="tier-high">[Tier 3]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Herald of Ice</span>
+                    <div class="support-list">
+                        <div class="support-item">Magnified Area I <span class="tier">[Tier 1]</span></div>
+                        <div class="support-item">Elemental Armament II <span class="tier-high">[Tier 2]</span></div>
+                        <div class="support-item">Elemental Focus <span class="tier-high">[Tier 3]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Barrage</span>
+                    <div class="support-list">
+                        <div class="support-item">Cooldown Recovery I <span class="tier-high">[Tier 3]</span></div>
+                        <div class="support-item upgrade"><span>Rapid Casting II <span class="tier-high">[Tier 4]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Ice-Tipped Arrows</span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Short Fuse I <span class="tier-high">[Tier 2]</span></span> <span class="upgrade-badge">Novo</span></div>
+                        <div class="support-item">Elemental Armament II <span class="tier-high">[Tier 2]</span></div>
+                        <div class="support-item">Magnified Area I <span class="tier">[Tier 1]</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Combat Frenzy</span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Charge Profusion I <span class="tier">[Tier 1]</span></span> <span class="upgrade-badge">Novo</span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Wind Dancer <span class="skill-new">(Nova)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Knockback <span class="tier-high">[Tier 3]</span></span></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Tornado Shot <span class="skill-new">(Nova)</span></span>
+                    <div class="support-list">
+                        <div class="support-item upgrade"><span>Prolonged Duration II <span class="tier-high">[Tier 3]</span></span></div>
+                        <div class="support-item upgrade"><span>Overabundance II <span class="tier-high">[Tier 4]</span></span></div>
+                        <div class="support-item upgrade"><span>Rapid Attacks II <span class="tier-high">[Tier 4]</span></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
