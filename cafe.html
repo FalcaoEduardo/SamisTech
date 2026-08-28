@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Arte do Café</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .img-hover img { transition: transform 0.5s ease; }
+        .img-hover:hover img { transform: scale(1.05); }
+
+        @keyframes fadeInSoft {
+            0% { opacity: 0; filter: blur(2px); }
+            100% { opacity: 1; filter: blur(0); }
+        }
+        .fade-in-soft {
+            animation: fadeInSoft 3.5s ease-out forwards;
+        }
+
+        /* Oculta a barra de rolagem estética */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Carrossel de fotos: a rolagem em si é controlada via JS (auto + arrastar) */
+        .carousel-track {
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .carousel-track.dragging {
+            cursor: grabbing;
+        }
+
+        /* Animação de entrada do quadro ao carregar a página */
+        @keyframes cardEnter {
+            0% { opacity: 0; transform: translateY(24px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .card-enter {
+            animation: cardEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* Lightbox: foto ampliada ao clicar */
+        #lightbox {
+            transition: opacity 0.25s ease;
+        }
+        #lightbox img {
+            animation: cardEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* Tela de senha */
+        #password-gate {
+            animation: fadeInSoft 0.4s ease-out both;
+        }
+        #password-input {
+            letter-spacing: 0.15em;
+        }
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-300 text-gray-800 font-sans antialiased relative min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+
+    <!-- Tela de senha: precisa acertar o código pra ver o conteúdo -->
+    <div id="password-gate" class="fixed inset-0 z-[60] flex items-center justify-center bg-gray-900 p-4">
+        <div class="bg-white rounded-xl shadow-2xl px-6 py-8 md:px-10 md:py-10 max-w-xs w-full text-center">
+            <h2 class="text-base md:text-lg font-bold tracking-[0.25em] uppercase text-gray-900 mb-2">Acesso Restrito</h2>
+            <p class="text-gray-500 text-xs md:text-sm mb-1">Digite a senha de 4 dígitos para continuar</p>
+            <p class="text-gray-400 text-[11px] md:text-xs mb-6">Data ex: 22/08 (dia/mês)</p>
+            <form id="password-form" class="flex flex-col items-center gap-4">
+                <input id="password-input" type="tel" inputmode="numeric" maxlength="5" placeholder="00/00"
+                       class="w-40 text-center text-2xl px-3 border-2 border-gray-300 rounded-lg py-2 focus:outline-none focus:border-amber-700"
+                       autocomplete="off" autofocus>
+                <p id="password-error" class="text-red-500 text-xs hidden">Senha incorreta, tente novamente.</p>
+                <button type="submit" class="w-full bg-gray-900 text-white text-sm font-semibold tracking-widest uppercase py-2.5 rounded-lg hover:bg-gray-700 transition-colors">
+                    Entrar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <section style="display:none;" class="card-enter relative z-10 max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[92vh] overflow-y-auto no-scrollbar bg-white rounded-xl px-5 py-6 md:px-10 md:py-8 text-center flex flex-col items-center justify-center shadow-[0_2px_4px_rgba(0,0,0,0.12),0_30px_55px_-15px_rgba(0,0,0,0.5)]">
+        
+        <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] uppercase text-gray-900 leading-normal mt-2">
+            Café<br>Especial
+        </h2>
+        
+        <div class="w-16 h-[1px] bg-gray-300 mx-auto my-4"></div>
+        
+        <p class="text-gray-500 font-light text-sm md:text-base max-w-md mx-auto mb-4 md:mb-5 leading-relaxed">
+            Descubra os sabores intensos e a arte da torra perfeita.
+        </p>
+
+        <!-- Container de texto com altura fixa: cada trecho aparece, some, e dá lugar ao próximo -->
+        <div class="mb-6 md:mb-8 flex items-center justify-center w-full min-h-[140px] sm:min-h-[110px] md:min-h-[90px]">
+            <h3 id="text1" class="text-sm md:text-base font-serif text-gray-800 leading-relaxed max-w-2xl mx-auto transition-opacity duration-500 ease-in-out"></h3>
+        </div>
+
+        <!-- Carrossel de fotos: rola sozinho e devagar, em loop -->
+        <div class="carousel-outer w-full pt-4 border-t border-gray-200 overflow-hidden">
+            <div class="carousel-track flex gap-2 md:gap-4" style="width: max-content;">
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm">
+                    <img src="assets/images/foto1.jpg" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
+                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
+                            Pura<br><span class="text-[11px] md:text-xl">Origem</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm">
+                    <img src="assets/images/foto2.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
+                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
+                            Torra<br><span class="text-[11px] md:text-xl">Fresca</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm">
+                    <img src="assets/images/foto3.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
+                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
+                            Bom<br><span class="text-[11px] md:text-xl">Aroma</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Conjunto repetido, para o loop ficar contínuo (sem "pulo" visível) -->
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm" aria-hidden="true">
+                    <img src="assets/images/foto1.jpg" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
+                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
+                            Pura<br><span class="text-[11px] md:text-xl">Origem</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm" aria-hidden="true">
+                    <img src="assets/images/foto2.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
+                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
+                            Torra<br><span class="text-[11px] md:text-xl">Fresca</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm" aria-hidden="true">
+                    <img src="assets/images/foto3.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
+                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
+                            Bom<br><span class="text-[11px] md:text-xl">Aroma</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox: mostra a foto ampliada ao clicar -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4">
+        <button id="lightbox-close" aria-label="Fechar" class="absolute top-4 right-4 md:top-6 md:right-6 text-white/90 hover:text-white text-3xl leading-none w-10 h-10 flex items-center justify-center">&times;</button>
+        <img id="lightbox-img" src="" alt="" class="w-auto h-auto max-w-[85vw] sm:max-w-xs md:max-w-sm max-h-[50vh] object-contain rounded-lg shadow-2xl">
+    </div>
+
+    <script>
+        var speed = 40;       // velocidade de digitação (ms por letra)
+        var holdTime = 1800;  // quanto tempo o trecho fica na tela antes de sumir
+        var fadeTime = 500;   // duração do fade (bate com a transição no CSS/classe do h3)
+
+        // "|" = quebra de linha dentro do mesmo trecho.
+        var paragraphs = [
+            "O café é muito mais do que uma bebida para despertar.|É uma experiência sensorial que conecta culturas e histórias.",
+            "Desde as fazendas de altitude até a xícara na sua mesa,|cada grão carrega notas de chocolate, caramelo ou frutas.",
+            "A extração perfeita exige paciência e técnica...|temperatura da água, moagem correta e o tempo exato.",
+            "Um brinde aos pequenos momentos de pausa no nosso dia!|Aproveite cada gole dessa jornada."
+        ];
+
+        var pIndex = 0;
+        var charIndex = 0;
+        var textEl = document.getElementById("text1");
+
+        function typeParagraph() {
+            var current = paragraphs[pIndex];
+            if (charIndex < current.length) {
+                var ch = current.charAt(charIndex);
+                textEl.innerHTML += (ch === '|') ? '<br>' : ch;
+                charIndex++;
+                setTimeout(typeParagraph, speed);
+            } else {
+                setTimeout(fadeOutParagraph, holdTime);
+            }
+        }
+
+        function fadeOutParagraph() {
+            textEl.style.opacity = 0;
+            setTimeout(function () {
+                textEl.innerHTML = '';
+                textEl.style.opacity = 1;
+                charIndex = 0;
+                pIndex++;
+                if (pIndex < paragraphs.length) {
+                    setTimeout(typeParagraph, 200);
+                } else {
+                    showFinalMessage();
+                }
+            }, fadeTime);
+        }
+
+        function showFinalMessage() {
+            textEl.innerHTML = '<div class="opacity-0 fade-in-soft"><span class="font-sans text-amber-700 font-medium text-xl md:text-2xl block">desperte os seus sentidos ☕</span></div>';
+        }
+
+        // Só começa a digitar depois que a senha for confirmada (ver tela de senha, mais abaixo)
+        window.startTextCycle = function () {
+            setTimeout(typeParagraph, 500);
+        };
+    </script>
+
+    <script>
+        // Carrossel: rola sozinho e devagar, e também pode ser arrastado com o dedo/mouse
+        (function () {
+            var track = document.querySelector('.carousel-track');
+            var outer = document.querySelector('.carousel-outer');
+            if (!track || !outer) return;
+
+            var posX = 0;           // posição atual da faixa de fotos (em px)
+            var autoSpeed = 0.35;   // velocidade da rolagem automática (px por frame, ~devagar)
+            var isDragging = false;
+            var isHovering = false;
+            var startX = 0;
+            var startPos = 0;
+            var dragMoved = 0;      // distância total percorrida no gesto atual (pra distinguir clique de arraste)
+            var pressedImg = null;  // imagem que estava sob o dedo/mouse quando o gesto começou
+
+            // como o conjunto de fotos está duplicado, um "conjunto" é metade da largura total
+            function getSetWidth() {
+                return track.scrollWidth / 2;
+            }
+
+            // mantém a posição sempre dentro de um conjunto, pra nunca aparecer espaço vazio
+            function wrap(x) {
+                var setWidth = getSetWidth();
+                if (setWidth <= 0) return x;
+                x = x % setWidth;
+                if (x > 0) x -= setWidth;
+                return x;
+            }
+
+            function render() {
+                track.style.transform = 'translateX(' + posX + 'px)';
+            }
+
+            function tick() {
+                if (!isDragging && !isHovering) {
+                    posX = wrap(posX - autoSpeed);
+                    render();
+                }
+                requestAnimationFrame(tick);
+            }
+
+            function getClientX(e) {
+                return e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
+            }
+
+            // Lightbox: foto ampliada ao clicar/tocar (sem arrastar)
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            var lightboxClose = document.getElementById('lightbox-close');
+
+            function openLightbox(src) {
+                lightboxImg.src = src;
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+            }
+
+            function closeLightbox() {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                lightboxImg.src = '';
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+
+            function onPointerDown(e) {
+                isDragging = true;
+                dragMoved = 0;
+                startX = getClientX(e);
+                startPos = posX;
+                var card = e.target && e.target.closest ? e.target.closest('.carousel-item') : null;
+                pressedImg = card ? card.querySelector('img') : null;
+                track.classList.add('dragging');
+                if (e.pointerId !== undefined && track.setPointerCapture) {
+                    track.setPointerCapture(e.pointerId);
+                }
+            }
+
+            function onPointerMove(e) {
+                if (!isDragging) return;
+                var delta = getClientX(e) - startX;
+                dragMoved = Math.abs(delta);
+                posX = startPos + delta;
+                render();
+            }
+
+            // Com o pointer capture ativo no track, o evento "click" nativo não chega
+            // até a <img> — então detectamos o "toque/clique parado" aqui mesmo, no fim do gesto.
+            function endDrag(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                track.classList.remove('dragging');
+                posX = wrap(posX);
+                render();
+
+                if (dragMoved <= 6 && pressedImg) {
+                    openLightbox(pressedImg.src);
+                }
+                pressedImg = null;
+            }
+
+            track.addEventListener('pointerdown', onPointerDown);
+            track.addEventListener('pointermove', onPointerMove);
+            track.addEventListener('pointerup', endDrag);
+            track.addEventListener('pointercancel', endDrag);
+            track.addEventListener('pointerleave', endDrag);
+
+            outer.addEventListener('mouseenter', function () { isHovering = true; });
+            outer.addEventListener('mouseleave', function () { isHovering = false; });
+
+            // Só começa a rolar depois que a senha for confirmada (ver tela de senha, mais abaixo)
+            window.startCarousel = function () {
+                requestAnimationFrame(tick);
+            };
+        })();
+    </script>
+
+    <script>
+        // Contador de acessos (CountAPI: serviço público e gratuito, sem precisar de conta).
+        // "visitas" soma toda vez que a página abre; "senha_correta" só quando alguém acerta a senha.
+        // Pra consultar os números depois, é só abrir no navegador:
+        //   https://api.countapi.xyz/get/rbrandsbr-cafeespecial-8f2q/visitas
+        //   https://api.countapi.xyz/get/rbrandsbr-cafeespecial-8f2q/senha_correta
+        var COUNTAPI_NAMESPACE = 'rbrandsbr-cafeespecial-8f2q';
+        function registrarContagem(chave) {
+            fetch('https://api.countapi.xyz/hit/' + COUNTAPI_NAMESPACE + '/' + chave).catch(function () {});
+        }
+        registrarContagem('visitas');
+    </script>
+
+    <script>
+        // Tela de senha: só libera o conteúdo se acertar o código
+        (function () {
+            var CORRECT_CODE = '2408';
+            var gate = document.getElementById('password-gate');
+            var form = document.getElementById('password-form');
+            var input = document.getElementById('password-input');
+            var errorMsg = document.getElementById('password-error');
+            var content = document.querySelector('section.card-enter');
+
+            // Formata o que a pessoa digita como DD/MM automaticamente
+            input.addEventListener('input', function () {
+                var digits = input.value.replace(/\D/g, '').slice(0, 4);
+                input.value = digits.length > 2 ? digits.slice(0, 2) + '/' + digits.slice(2) : digits;
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var digitsOnly = input.value.replace(/\D/g, '');
+                if (digitsOnly === CORRECT_CODE) {
+                    registrarContagem('senha_correta');
+                    gate.remove();
+                    content.style.display = '';
+                    // espera o layout se ajustar antes de iniciar texto e carrossel
+                    setTimeout(function () {
+                        if (window.startTextCycle) window.startTextCycle();
+                        if (window.startCarousel) window.startCarousel();
+                    }, 50);
+                } else {
+                    errorMsg.classList.remove('hidden');
+                    input.classList.add('shake');
+                    input.value = '';
+                    input.focus();
+                    setTimeout(function () { input.classList.remove('shake'); }, 400);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
