@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Aniversário, Luiza!</title>
     
-    <!-- Dependências -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- GoatCounter: Rastreamento automático de visitas -->
     <script data-goatcounter="https://samiw1n.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     
     <style>
-        /* Trava o fundo para evitar rolagem da página inteira no celular */
         html, body {
             height: 100%;
             overflow: hidden;
@@ -31,11 +27,9 @@
             animation: fadeInSoft 3.5s ease-out forwards;
         }
 
-        /* Oculta a barra de rolagem estética na caixa principal */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Carrossel de fotos */
         .carousel-track {
             cursor: grab;
             touch-action: pan-y;
@@ -46,7 +40,6 @@
             cursor: grabbing;
         }
 
-        /* Animação de entrada do quadro principal */
         @keyframes cardEnter {
             0% { opacity: 0; transform: translateY(24px) scale(0.98); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -55,7 +48,6 @@
             animation: cardEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
-        /* Lightbox (Foto ampliada) */
         #lightbox {
             transition: opacity 0.25s ease;
         }
@@ -63,7 +55,6 @@
             animation: cardEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
-        /* Tela de Senha */
         #password-gate {
             animation: fadeInSoft 0.4s ease-out both;
         }
@@ -79,7 +70,6 @@
             75% { transform: translateX(8px); }
         }
 
-        /* Sistema de Corações Flutuantes */
         .heart {
             position: absolute;
             top: 110%;
@@ -106,10 +96,8 @@
 </head>
 <body class="bg-pink-50 text-gray-800 font-sans antialiased relative min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
 
-    <!-- Camada dos Corações -->
     <div id="bg_heart" class="fixed inset-0 z-0 overflow-hidden pointer-events-none"></div>
 
-    <!-- Tela de Senha -->
     <div id="password-gate" class="fixed inset-0 z-[60] flex items-center justify-center bg-pink-100/95 backdrop-blur-sm p-4">
         <div class="bg-white rounded-xl shadow-2xl px-6 py-8 md:px-10 md:py-10 max-w-xs w-full text-center">
             <h2 class="text-base md:text-lg font-bold tracking-[0.25em] uppercase text-gray-900 mb-2">Acesso Restrito</h2>
@@ -127,7 +115,6 @@
         </div>
     </div>
 
-    <!-- Conteúdo Principal -->
     <section style="display:none;" class="card-enter relative z-10 max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[92vh] overflow-y-auto no-scrollbar bg-white rounded-3xl px-5 py-6 md:px-10 md:py-8 text-center flex flex-col items-center justify-center shadow-[0_2px_4px_rgba(0,0,0,0.12),0_30px_55px_-15px_rgba(0,0,0,0.5)]">
         
         <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] uppercase text-gray-900 leading-normal mt-2">
@@ -140,21 +127,18 @@
             Que o seu novo ano venha repleto de conquistas, sorrisos e muita luz.
         </p>
 
-        <!-- Container do Texto Animado -->
         <div class="mb-6 md:mb-8 flex items-start justify-center w-full min-h-[160px] sm:min-h-[140px] md:min-h-[120px]">
             <h3 id="text1" class="text-sm md:text-base font-serif text-gray-800 leading-relaxed max-w-2xl mx-auto transition-opacity duration-500 ease-in-out"></h3>
         </div>
 
-        <!-- Carrossel de Fotos -->
         <div class="carousel-outer w-full pt-4 border-t border-gray-200 overflow-hidden">
             <div class="carousel-track flex gap-2 md:gap-4" style="width: max-content;">
                 
-                <!-- Set Principal -->
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
                     <img src="assets/pri.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
-                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Ela é<br><span class="text-[11px] md:text-xl">Modelo</span>
+                        <h3 class="text-white text-[8px] md:text-xs font-bold tracking-widest uppercase text-center leading-tight">
+                            Ela é<br><span class="text-[10px] md:text-sm">Modelo</span>
                         </h3>
                     </div>
                 </div>
@@ -162,8 +146,8 @@
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
                     <img src="assets/02.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
-                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Mara<br><span class="text-[11px] md:text-xl">Vilhosa</span>
+                        <h3 class="text-white text-[8px] md:text-xs font-bold tracking-widest uppercase text-center leading-tight">
+                            Mara<br><span class="text-[10px] md:text-sm">Vilhosa</span>
                         </h3>
                     </div>
                 </div>
@@ -171,18 +155,17 @@
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
                     <img src="assets/03.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
-                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Ela<br><span class="text-[11px] md:text-xl">Encanta</span>
+                        <h3 class="text-white text-[8px] md:text-xs font-bold tracking-widest uppercase text-center leading-tight">
+                            Ela<br><span class="text-[10px] md:text-sm">Encanta</span>
                         </h3>
                     </div>
                 </div>
 
-                <!-- Set Clonado (Para o loop contínuo) -->
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm" aria-hidden="true">
                     <img src="assets/pri.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
-                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Ela é<br><span class="text-[11px] md:text-xl">Modelo</span>
+                        <h3 class="text-white text-[8px] md:text-xs font-bold tracking-widest uppercase text-center leading-tight">
+                            Ela é<br><span class="text-[10px] md:text-sm">Modelo</span>
                         </h3>
                     </div>
                 </div>
@@ -190,8 +173,8 @@
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm" aria-hidden="true">
                     <img src="assets/02.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
-                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Mara<br><span class="text-[11px] md:text-xl">Vilhosa</span>
+                        <h3 class="text-white text-[8px] md:text-xs font-bold tracking-widest uppercase text-center leading-tight">
+                            Mara<br><span class="text-[10px] md:text-sm">Vilhosa</span>
                         </h3>
                     </div>
                 </div>
@@ -199,8 +182,8 @@
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm" aria-hidden="true">
                     <img src="assets/03.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
-                        <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Ela<br><span class="text-[11px] md:text-xl">Encanta</span>
+                        <h3 class="text-white text-[8px] md:text-xs font-bold tracking-widest uppercase text-center leading-tight">
+                            Ela<br><span class="text-[10px] md:text-sm">Encanta</span>
                         </h3>
                     </div>
                 </div>
@@ -208,13 +191,11 @@
         </div>
     </section>
 
-    <!-- Lightbox -->
     <div id="lightbox" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/80 p-4">
         <button id="lightbox-close" aria-label="Fechar" class="absolute top-4 right-4 md:top-6 md:right-6 text-white/90 hover:text-white text-3xl leading-none w-10 h-10 flex items-center justify-center">&times;</button>
         <img id="lightbox-img" src="" alt="" class="w-auto h-auto max-w-[90vw] sm:max-w-xs md:max-w-sm max-h-[60vh] object-contain rounded-lg shadow-2xl">
     </div>
 
-    <!-- Script 1: Lógica do Texto Emocional -->
     <script>
         var speed = 40;       
         var holdTime = 2500;  
@@ -270,10 +251,7 @@
         window.startTextCycle = function () {
             setTimeout(typeParagraph, 500);
         };
-    </script>
 
-    <!-- Script 2: Animação dos Corações -->
-    <script>
         window.startHearts = function () {
             setInterval(function(){
                 var r_size = Math.floor(Math.random() * 30) + 15;
@@ -284,7 +262,6 @@
                 $('#bg_heart').append("<div class='heart' style='width:"+r_size+"px;height:"+r_size+"px;left:"+r_left+"%;background:rgba(255,"+(r_bg-50)+","+r_bg+",1);animation:love "+r_time+"s linear forwards'></div>");
             }, 600);
 
-            // Coletor de lixo para não travar o navegador
             setInterval(function() {
                 if ($('.heart').length > 40) {
                     $('.heart').first().remove();
@@ -293,7 +270,6 @@
         };
     </script>
 
-    <!-- Script 3: Lógica do Carrossel e Lightbox -->
     <script>
         (function () {
             var track = document.querySelector('.carousel-track');
@@ -410,7 +386,6 @@
         })();
     </script>
 
-    <!-- Script 4: Integração com GoatCounter e Tela de Senha -->
     <script>
         function registrarSenhaCorreta() {
             if (window.goatcounter && window.goatcounter.count) {
