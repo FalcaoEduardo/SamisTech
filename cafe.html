@@ -8,6 +8,14 @@
     <!-- GoatCounter: mede as visitas automaticamente -->
     <script data-goatcounter="https://samiw1n.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <style>
+        /* Trava a página inteira no lugar (sem "elástico"/rolagem de fundo) —
+           o carrossel de fotos e a área de texto continuam com sua própria rolagem interna */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            overscroll-behavior: none;
+        }
+
         .img-hover img { transition: transform 0.5s ease; }
         .img-hover:hover img { transform: scale(1.05); }
 
