@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Arte do Café</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GoatCounter: mede as visitas automaticamente -->
+    <script data-goatcounter="https://samiw1n.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <style>
         .img-hover img { transition: transform 0.5s ease; }
         .img-hover:hover img { transform: scale(1.05); }
@@ -348,16 +350,17 @@
     </script>
 
     <script>
-        // Contador de acessos (CountAPI: serviço público e gratuito, sem precisar de conta).
-        // "visitas" soma toda vez que a página abre; "senha_correta" só quando alguém acerta a senha.
-        // Pra consultar os números depois, é só abrir no navegador:
-        //   https://api.countapi.xyz/get/rbrandsbr-cafeespecial-8f2q/visitas
-        //   https://api.countapi.xyz/get/rbrandsbr-cafeespecial-8f2q/senha_correta
-        var COUNTAPI_NAMESPACE = 'rbrandsbr-cafeespecial-8f2q';
-        function registrarContagem(chave) {
-            fetch('https://api.countapi.xyz/hit/' + COUNTAPI_NAMESPACE + '/' + chave).catch(function () {});
+        // Contador de acessos (GoatCounter). As visitas em si já são medidas automaticamente
+        // pelo script no <head>; aqui só registramos o evento extra de "senha correta".
+        function registrarSenhaCorreta() {
+            if (window.goatcounter && window.goatcounter.count) {
+                window.goatcounter.count({
+                    path: 'senha-correta',
+                    title: 'Senha correta digitada',
+                    event: true
+                });
+            }
         }
-        registrarContagem('visitas');
     </script>
 
     <script>
@@ -380,7 +383,7 @@
                 e.preventDefault();
                 var digitsOnly = input.value.replace(/\D/g, '');
                 if (digitsOnly === CORRECT_CODE) {
-                    registrarContagem('senha_correta');
+                    registrarSenhaCorreta();
                     gate.remove();
                     content.style.display = '';
                     // espera o layout se ajustar antes de iniciar texto e carrossel
