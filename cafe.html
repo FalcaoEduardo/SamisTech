@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Arte do Café</title>
+    <title>Feliz Aniversário, Luiza!</title>
+    
+    <!-- Dependências -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GoatCounter: mede as visitas automaticamente -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- GoatCounter: Rastreamento automático de visitas -->
     <script data-goatcounter="https://samiw1n.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    
     <style>
-        /* Trava a página inteira no lugar (sem "elástico"/rolagem de fundo) —
-           o carrossel de fotos e a área de texto continuam com sua própria rolagem interna */
+        /* Trava o fundo para evitar rolagem da página inteira no celular */
         html, body {
             height: 100%;
             overflow: hidden;
@@ -27,11 +31,11 @@
             animation: fadeInSoft 3.5s ease-out forwards;
         }
 
-        /* Oculta a barra de rolagem estética */
+        /* Oculta a barra de rolagem estética na caixa principal */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Carrossel de fotos: a rolagem em si é controlada via JS (auto + arrastar) */
+        /* Carrossel de fotos */
         .carousel-track {
             cursor: grab;
             touch-action: pan-y;
@@ -42,7 +46,7 @@
             cursor: grabbing;
         }
 
-        /* Animação de entrada do quadro ao carregar a página */
+        /* Animação de entrada do quadro principal */
         @keyframes cardEnter {
             0% { opacity: 0; transform: translateY(24px) scale(0.98); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -51,7 +55,7 @@
             animation: cardEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
-        /* Lightbox: foto ampliada ao clicar */
+        /* Lightbox (Foto ampliada) */
         #lightbox {
             transition: opacity 0.25s ease;
         }
@@ -59,7 +63,7 @@
             animation: cardEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
-        /* Tela de senha */
+        /* Tela de Senha */
         #password-gate {
             animation: fadeInSoft 0.4s ease-out both;
         }
@@ -74,19 +78,46 @@
             25% { transform: translateX(-8px); }
             75% { transform: translateX(8px); }
         }
+
+        /* Sistema de Corações Flutuantes */
+        .heart {
+            position: absolute;
+            top: 110%;
+            transform: rotate(-45deg);
+            opacity: 0.6; 
+        }
+        .heart:before, .heart:after {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: 100%;
+        }
+        .heart:before { top: -50%; left: 0; }
+        .heart:after { top: 0; right: -50%; }
+
+        @keyframes love {
+            0% { top: 110%; }
+            100% { top: -20%; } 
+        }
     </style>
 </head>
-<body class="bg-gray-300 text-gray-800 font-sans antialiased relative min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+<body class="bg-pink-50 text-gray-800 font-sans antialiased relative min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
 
-    <!-- Tela de senha: precisa acertar o código pra ver o conteúdo -->
-    <div id="password-gate" class="fixed inset-0 z-[60] flex items-center justify-center bg-gray-900 p-4">
+    <!-- Camada dos Corações -->
+    <div id="bg_heart" class="fixed inset-0 z-0 overflow-hidden pointer-events-none"></div>
+
+    <!-- Tela de Senha -->
+    <div id="password-gate" class="fixed inset-0 z-[60] flex items-center justify-center bg-pink-100/95 backdrop-blur-sm p-4">
         <div class="bg-white rounded-xl shadow-2xl px-6 py-8 md:px-10 md:py-10 max-w-xs w-full text-center">
             <h2 class="text-base md:text-lg font-bold tracking-[0.25em] uppercase text-gray-900 mb-2">Acesso Restrito</h2>
             <p class="text-gray-500 text-xs md:text-sm mb-1">Digite a senha de 4 dígitos para continuar</p>
             <p class="text-gray-400 text-[11px] md:text-xs mb-6">Data ex: 22/08 (dia/mês)</p>
             <form id="password-form" class="flex flex-col items-center gap-4">
                 <input id="password-input" type="tel" inputmode="numeric" maxlength="5" placeholder="00/00"
-                       class="w-40 text-center text-2xl px-3 border-2 border-gray-300 rounded-lg py-2 focus:outline-none focus:border-amber-700"
+                       class="w-40 text-center text-2xl px-3 border-2 border-gray-300 rounded-lg py-2 focus:outline-none focus:border-rose-500"
                        autocomplete="off" autofocus>
                 <p id="password-error" class="text-red-500 text-xs hidden">Senha incorreta, tente novamente.</p>
                 <button type="submit" class="w-full bg-gray-900 text-white text-sm font-semibold tracking-widest uppercase py-2.5 rounded-lg hover:bg-gray-700 transition-colors">
@@ -96,77 +127,80 @@
         </div>
     </div>
 
-    <section style="display:none;" class="card-enter relative z-10 max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[92vh] overflow-y-auto no-scrollbar bg-white rounded-xl px-5 py-6 md:px-10 md:py-8 text-center flex flex-col items-center justify-center shadow-[0_2px_4px_rgba(0,0,0,0.12),0_30px_55px_-15px_rgba(0,0,0,0.5)]">
+    <!-- Conteúdo Principal -->
+    <section style="display:none;" class="card-enter relative z-10 max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[92vh] overflow-y-auto no-scrollbar bg-white rounded-3xl px-5 py-6 md:px-10 md:py-8 text-center flex flex-col items-center justify-center shadow-[0_2px_4px_rgba(0,0,0,0.12),0_30px_55px_-15px_rgba(0,0,0,0.5)]">
         
         <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] uppercase text-gray-900 leading-normal mt-2">
-            Café<br>Especial
+            Feliz<br>Aniversário
         </h2>
         
         <div class="w-16 h-[1px] bg-gray-300 mx-auto my-4"></div>
         
         <p class="text-gray-500 font-light text-sm md:text-base max-w-md mx-auto mb-4 md:mb-5 leading-relaxed">
-            Descubra os sabores intensos e a arte da torra perfeita.
+            Que o seu novo ano venha repleto de conquistas, sorrisos e muita luz.
         </p>
 
-        <!-- Container de texto com altura fixa: cada trecho aparece, some, e dá lugar ao próximo -->
-        <div class="mb-6 md:mb-8 flex items-center justify-center w-full min-h-[140px] sm:min-h-[110px] md:min-h-[90px]">
+        <!-- Container do Texto Animado -->
+        <div class="mb-6 md:mb-8 flex items-start justify-center w-full min-h-[160px] sm:min-h-[140px] md:min-h-[120px]">
             <h3 id="text1" class="text-sm md:text-base font-serif text-gray-800 leading-relaxed max-w-2xl mx-auto transition-opacity duration-500 ease-in-out"></h3>
         </div>
 
-        <!-- Carrossel de fotos: rola sozinho e devagar, em loop -->
+        <!-- Carrossel de Fotos -->
         <div class="carousel-outer w-full pt-4 border-t border-gray-200 overflow-hidden">
             <div class="carousel-track flex gap-2 md:gap-4" style="width: max-content;">
-                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm">
-                    <img src="assets/foto1.jpg" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                
+                <!-- Set Principal -->
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
+                    <img src="assets/pri.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
                         <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Pura<br><span class="text-[11px] md:text-xl">Origem</span>
+                            Ela é<br><span class="text-[11px] md:text-xl">Modelo</span>
                         </h3>
                     </div>
                 </div>
 
-                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm">
-                    <img src="assets/foto2.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
+                    <img src="assets/02.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
                         <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Torra<br><span class="text-[11px] md:text-xl">Fresca</span>
+                            Mara<br><span class="text-[11px] md:text-xl">Vilhosa</span>
                         </h3>
                     </div>
                 </div>
 
-                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm">
-                    <img src="assets/foto3.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
+                    <img src="assets/03.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
                         <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Bom<br><span class="text-[11px] md:text-xl">Aroma</span>
+                            Ela<br><span class="text-[11px] md:text-xl">Encanta</span>
                         </h3>
                     </div>
                 </div>
 
-                <!-- Conjunto repetido, para o loop ficar contínuo (sem "pulo" visível) -->
-                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm" aria-hidden="true">
-                    <img src="assets/foto1.jpg" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                <!-- Set Clonado (Para o loop contínuo) -->
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm" aria-hidden="true">
+                    <img src="assets/pri.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
                         <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Pura<br><span class="text-[11px] md:text-xl">Origem</span>
+                            Ela é<br><span class="text-[11px] md:text-xl">Modelo</span>
                         </h3>
                     </div>
                 </div>
 
-                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm" aria-hidden="true">
-                    <img src="assets/foto2.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm" aria-hidden="true">
+                    <img src="assets/02.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
                         <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Torra<br><span class="text-[11px] md:text-xl">Fresca</span>
+                            Mara<br><span class="text-[11px] md:text-xl">Vilhosa</span>
                         </h3>
                     </div>
                 </div>
 
-                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-300 rounded-lg shadow-sm" aria-hidden="true">
-                    <img src="assets/foto3.png" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
+                <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm" aria-hidden="true">
+                    <img src="assets/03.JPG" alt="" class="w-full h-full object-cover" draggable="false" onerror="this.style.display='none'">
                     <div class="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/40">
                         <h3 class="text-white text-[9px] md:text-lg font-bold tracking-widest uppercase text-center leading-tight md:leading-relaxed">
-                            Bom<br><span class="text-[11px] md:text-xl">Aroma</span>
+                            Ela<br><span class="text-[11px] md:text-xl">Encanta</span>
                         </h3>
                     </div>
                 </div>
@@ -174,23 +208,28 @@
         </div>
     </section>
 
-    <!-- Lightbox: mostra a foto ampliada ao clicar -->
-    <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4">
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/80 p-4">
         <button id="lightbox-close" aria-label="Fechar" class="absolute top-4 right-4 md:top-6 md:right-6 text-white/90 hover:text-white text-3xl leading-none w-10 h-10 flex items-center justify-center">&times;</button>
-        <img id="lightbox-img" src="" alt="" class="w-auto h-auto max-w-[85vw] sm:max-w-xs md:max-w-sm max-h-[50vh] object-contain rounded-lg shadow-2xl">
+        <img id="lightbox-img" src="" alt="" class="w-auto h-auto max-w-[90vw] sm:max-w-xs md:max-w-sm max-h-[60vh] object-contain rounded-lg shadow-2xl">
     </div>
 
+    <!-- Script 1: Lógica do Texto Emocional -->
     <script>
-        var speed = 40;       // velocidade de digitação (ms por letra)
-        var holdTime = 1800;  // quanto tempo o trecho fica na tela antes de sumir
-        var fadeTime = 500;   // duração do fade (bate com a transição no CSS/classe do h3)
+        var speed = 40;       
+        var holdTime = 2500;  
+        var fadeTime = 500;   
 
-        // "|" = quebra de linha dentro do mesmo trecho.
         var paragraphs = [
-            "O café é muito mais do que uma bebida para despertar.|É uma experiência sensorial que conecta culturas e histórias.",
-            "Desde as fazendas de altitude até a xícara na sua mesa,|cada grão carrega notas de chocolate, caramelo ou frutas.",
-            "A extração perfeita exige paciência e técnica...|temperatura da água, moagem correta e o tempo exato.",
-            "Um brinde aos pequenos momentos de pausa no nosso dia!|Aproveite cada gole dessa jornada."
+            "Feliz aniversário, Lulu!|Hoje é um daqueles dias que o coração se recusa a esquecer.",
+            "Existem coisas que o tempo simplesmente não apaga,|e o que sinto por você é a maior delas.",
+            "Hoje entendo tudo o que aconteceu.|Eu precisava lutar pela minha saúde e focar no meu tratamento...",
+            "...e a vida nos empurrou para caminhos diferentes|pois eu não tinha como ser o parceiro que você merecia.",
+            "Mas a verdade nua e crua|é que você nunca saiu da minha cabeça.",
+            "Sinto falta da nossa parceria|e de como a vida parecia mais certa com você do meu lado.",
+            "Se eu pudesse fazer um único pedido hoje,|seria ter a chance de vivermos nós dois de novo...",
+            "...agora que estou bem, inteiro|e pronto para entregar o que não pude lá atrás.",
+            "Independentemente de qualquer coisa,|você sempre será a minha luz."
         ];
 
         var pIndex = 0;
@@ -225,37 +264,55 @@
         }
 
         function showFinalMessage() {
-            textEl.innerHTML = '<div class="opacity-0 fade-in-soft"><span class="font-sans text-amber-700 font-medium text-xl md:text-2xl block">desperte os seus sentidos ☕</span></div>';
+            textEl.innerHTML = '<div class="opacity-0 fade-in-soft mt-2"><span class="font-sans text-rose-500 font-medium text-xl md:text-2xl block">eu te amo nunca deixarei de te amar ❤️</span></div>';
         }
 
-        // Só começa a digitar depois que a senha for confirmada (ver tela de senha, mais abaixo)
         window.startTextCycle = function () {
             setTimeout(typeParagraph, 500);
         };
     </script>
 
+    <!-- Script 2: Animação dos Corações -->
     <script>
-        // Carrossel: rola sozinho e devagar, e também pode ser arrastado com o dedo/mouse
+        window.startHearts = function () {
+            setInterval(function(){
+                var r_size = Math.floor(Math.random() * 30) + 15;
+                var r_left = Math.floor(Math.random() * 100) + 1;
+                var r_time = Math.floor(Math.random() * 10) + 8;
+                var r_bg = Math.floor(Math.random() * 50) + 150;
+                
+                $('#bg_heart').append("<div class='heart' style='width:"+r_size+"px;height:"+r_size+"px;left:"+r_left+"%;background:rgba(255,"+(r_bg-50)+","+r_bg+",1);animation:love "+r_time+"s linear forwards'></div>");
+            }, 600);
+
+            // Coletor de lixo para não travar o navegador
+            setInterval(function() {
+                if ($('.heart').length > 40) {
+                    $('.heart').first().remove();
+                }
+            }, 1000);
+        };
+    </script>
+
+    <!-- Script 3: Lógica do Carrossel e Lightbox -->
+    <script>
         (function () {
             var track = document.querySelector('.carousel-track');
             var outer = document.querySelector('.carousel-outer');
             if (!track || !outer) return;
 
-            var posX = 0;           // posição atual da faixa de fotos (em px)
-            var autoSpeed = 0.35;   // velocidade da rolagem automática (px por frame, ~devagar)
+            var posX = 0;           
+            var autoSpeed = 0.35;   
             var isDragging = false;
             var isHovering = false;
             var startX = 0;
             var startPos = 0;
-            var dragMoved = 0;      // distância total percorrida no gesto atual (pra distinguir clique de arraste)
-            var pressedImg = null;  // imagem que estava sob o dedo/mouse quando o gesto começou
+            var dragMoved = 0;      
+            var pressedImg = null;  
 
-            // como o conjunto de fotos está duplicado, um "conjunto" é metade da largura total
             function getSetWidth() {
                 return track.scrollWidth / 2;
             }
 
-            // mantém a posição sempre dentro de um conjunto, pra nunca aparecer espaço vazio
             function wrap(x) {
                 var setWidth = getSetWidth();
                 if (setWidth <= 0) return x;
@@ -280,7 +337,6 @@
                 return e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
             }
 
-            // Lightbox: foto ampliada ao clicar/tocar (sem arrastar)
             var lightbox = document.getElementById('lightbox');
             var lightboxImg = document.getElementById('lightbox-img');
             var lightboxClose = document.getElementById('lightbox-close');
@@ -326,8 +382,6 @@
                 render();
             }
 
-            // Com o pointer capture ativo no track, o evento "click" nativo não chega
-            // até a <img> — então detectamos o "toque/clique parado" aqui mesmo, no fim do gesto.
             function endDrag(e) {
                 if (!isDragging) return;
                 isDragging = false;
@@ -350,16 +404,14 @@
             outer.addEventListener('mouseenter', function () { isHovering = true; });
             outer.addEventListener('mouseleave', function () { isHovering = false; });
 
-            // Só começa a rolar depois que a senha for confirmada (ver tela de senha, mais abaixo)
             window.startCarousel = function () {
                 requestAnimationFrame(tick);
             };
         })();
     </script>
 
+    <!-- Script 4: Integração com GoatCounter e Tela de Senha -->
     <script>
-        // Contador de acessos (GoatCounter). As visitas em si já são medidas automaticamente
-        // pelo script no <head>; aqui só registramos o evento extra de "senha correta".
         function registrarSenhaCorreta() {
             if (window.goatcounter && window.goatcounter.count) {
                 window.goatcounter.count({
@@ -369,10 +421,7 @@
                 });
             }
         }
-    </script>
 
-    <script>
-        // Tela de senha: só libera o conteúdo se acertar o código
         (function () {
             var CORRECT_CODE = '2408';
             var gate = document.getElementById('password-gate');
@@ -381,7 +430,6 @@
             var errorMsg = document.getElementById('password-error');
             var content = document.querySelector('section.card-enter');
 
-            // Formata o que a pessoa digita como DD/MM automaticamente
             input.addEventListener('input', function () {
                 var digits = input.value.replace(/\D/g, '').slice(0, 4);
                 input.value = digits.length > 2 ? digits.slice(0, 2) + '/' + digits.slice(2) : digits;
@@ -394,8 +442,9 @@
                     registrarSenhaCorreta();
                     gate.remove();
                     content.style.display = '';
-                    // espera o layout se ajustar antes de iniciar texto e carrossel
+                    
                     setTimeout(function () {
+                        if (window.startHearts) window.startHearts();
                         if (window.startTextCycle) window.startTextCycle();
                         if (window.startCarousel) window.startCarousel();
                     }, 50);
