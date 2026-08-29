@@ -117,21 +117,22 @@
 
     <section style="display:none;" class="card-enter relative z-10 max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[92vh] overflow-y-auto no-scrollbar bg-white rounded-3xl px-5 py-6 md:px-10 md:py-8 text-center flex flex-col items-center justify-center shadow-[0_2px_4px_rgba(0,0,0,0.12),0_30px_55px_-15px_rgba(0,0,0,0.5)]">
         
-        <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] uppercase text-gray-900 leading-normal mt-2">
+        <h2 class="text-xl md:text-2xl font-bold tracking-[0.3em] uppercase text-gray-900 leading-normal mt-2 flex-shrink-0">
             Feliz<br>Aniversário
         </h2>
         
-        <div class="w-16 h-[1px] bg-gray-300 mx-auto my-4"></div>
+        <div class="w-16 h-[1px] bg-gray-300 mx-auto my-4 flex-shrink-0"></div>
         
-        <p class="text-gray-500 font-light text-sm md:text-base max-w-md mx-auto mb-4 md:mb-5 leading-relaxed">
+        <p class="text-gray-500 font-light text-sm md:text-base max-w-md mx-auto mb-4 md:mb-5 leading-relaxed flex-shrink-0">
             Que o seu novo ano venha repleto de conquistas, sorrisos e muita luz.
         </p>
 
-        <div class="mb-6 md:mb-8 flex items-start justify-center w-full min-h-[160px] sm:min-h-[140px] md:min-h-[120px]">
+        <!-- A altura mínima foi aumentada para comportar 4 linhas confortavelmente -->
+        <div class="mb-6 md:mb-8 flex items-start justify-center w-full min-h-[200px] sm:min-h-[160px] md:min-h-[140px] flex-grow">
             <h3 id="text1" class="text-sm md:text-base font-serif text-gray-800 leading-relaxed max-w-2xl mx-auto transition-opacity duration-500 ease-in-out"></h3>
         </div>
 
-        <div class="carousel-outer w-full pt-4 border-t border-gray-200 overflow-hidden">
+        <div class="carousel-outer w-full pt-4 border-t border-gray-200 overflow-hidden flex-shrink-0">
             <div class="carousel-track flex gap-2 md:gap-4" style="width: max-content;">
                 
                 <div class="carousel-item relative overflow-hidden group img-hover cursor-zoom-in aspect-[4/3] w-28 sm:w-32 md:w-44 flex-shrink-0 bg-gray-200 rounded-lg shadow-sm">
@@ -196,20 +197,18 @@
         <img id="lightbox-img" src="" alt="" class="w-auto h-auto max-w-[90vw] sm:max-w-xs md:max-w-sm max-h-[60vh] object-contain rounded-lg shadow-2xl">
     </div>
 
+    <!-- Script de Texto Atualizado (Agrupamento e Exibição Final Completa) -->
     <script>
         var speed = 40;       
-        var holdTime = 2500;  
+        var holdTime = 4000;  // Aumentado para dar tempo de ler as 4 linhas antes de sumir
         var fadeTime = 500;   
 
+        // Os parágrafos foram agrupados em blocos de 4 linhas
         var paragraphs = [
-            "Feliz aniversário, Lulu!|Hoje é um daqueles dias que o coração se recusa a esquecer.",
-            "Existem coisas que o tempo simplesmente não apaga,|e o que sinto por você é a maior delas.",
-            "Hoje entendo tudo o que aconteceu.|Eu precisava lutar pela minha saúde e focar no meu tratamento...",
-            "...e a vida nos empurrou para caminhos diferentes|pois eu não tinha como ser o parceiro que você merecia.",
-            "Mas a verdade nua e crua|é que você nunca saiu da minha cabeça.",
-            "Sinto falta da nossa parceria|e de como a vida parecia mais certa com você do meu lado.",
-            "Se eu pudesse fazer um único pedido hoje,|seria ter a chance de vivermos nós dois de novo...",
-            "...agora que estou bem, inteiro|e pronto para entregar o que não pude lá atrás.",
+            "Feliz aniversário, Lulu!|Hoje é um daqueles dias que o coração se recusa a esquecer.|Existem coisas que o tempo simplesmente não apaga,|e o que sinto por você é a maior delas.",
+            "Hoje entendo tudo o que aconteceu.|Eu precisava lutar pela minha saúde e focar no meu tratamento...|...e a vida nos empurrou para caminhos diferentes|pois eu não tinha como ser o parceiro que você merecia.",
+            "Mas a verdade nua e crua|é que você nunca saiu da minha cabeça.|Sinto falta da nossa parceria|e de como a vida parecia mais certa com você do meu lado.",
+            "Se eu pudesse fazer um único pedido hoje,|seria ter a chance de vivermos nós dois de novo...|...agora que estou bem, inteiro|e pronto para entregar o que não pude lá atrás.",
             "Independentemente de qualquer coisa,|você sempre será a minha luz."
         ];
 
@@ -245,7 +244,11 @@
         }
 
         function showFinalMessage() {
-            textEl.innerHTML = '<div class="opacity-0 fade-in-soft mt-2"><span class="font-sans text-rose-500 font-medium text-xl md:text-2xl block">eu te amo nunca deixarei de te amar ❤️</span></div>';
+            // Junta toda a matriz "paragraphs", separa os blocos com quebras duplas e substitui os "|" por quebras simples
+            var fullText = paragraphs.join('<br><br>').replace(/\|/g, '<br>');
+            
+            // Injeta o texto completo e, ao final, a declaração com efeito de fade
+            textEl.innerHTML = fullText + '<br><br><div class="opacity-0 fade-in-soft mt-4"><span class="font-sans text-rose-500 font-medium text-xl md:text-2xl block">eu te amo nunca deixarei de te amar ❤️</span></div>';
         }
 
         window.startTextCycle = function () {
@@ -270,6 +273,7 @@
         };
     </script>
 
+    <!-- Script de Carrossel -->
     <script>
         (function () {
             var track = document.querySelector('.carousel-track');
@@ -386,6 +390,7 @@
         })();
     </script>
 
+    <!-- Script da Senha -->
     <script>
         function registrarSenhaCorreta() {
             if (window.goatcounter && window.goatcounter.count) {
