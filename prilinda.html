@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço Flowery | Estética & Bem-Estar</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- AOS CSS (Efeitos de Rolagem) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-logo { font-family: 'Montserrat', sans-serif; letter-spacing: 0.08em; }
+        .img-harmonizada {
+            filter: brightness(0.95) contrast(0.9) saturate(0.75);
+        }
+        .img-harmonizada:hover {
+            filter: brightness(1) contrast(1) saturate(0.9);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased" x-data="{ categoria: 'todos' }">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200" data-aos="fade-down" data-aos-duration="600">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+            <a href="#" class="flex flex-col">
+                <span class="font-logo text-lg md:text-2xl font-normal text-stone-900 uppercase tracking-widest">Flowery</span>
+                <span class="text-[8px] md:text-[9px] uppercase tracking-[0.25em] text-rose-900 font-medium -mt-1">Espaço de Beleza</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+                <a href="#servicos" class="hover:text-rose-900 transition">Serviços</a>
+                <a href="#sobre" class="hover:text-rose-900 transition">Sobre</a>
+                <a href="#avaliacoes" class="hover:text-rose-900 transition">Avaliações</a>
+                <a href="#contato" class="hover:text-rose-900 transition">Contato</a>
+            </nav>
+            <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20um%20horário%20no%20Espaço%20Flowery." target="_blank" class="bg-rose-900 hover:bg-rose-800 text-white text-xs md:text-sm font-semibold px-4 md:px-5 py-2.5 rounded-full shadow-sm transition">
+                Agendar Horário
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-stone-900 text-white py-8 md:py-24 px-4 md:px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+            
+            <!-- Imagem de Capa -->
+            <div class="relative flex justify-center order-1 md:order-2" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="relative w-full max-w-[350px] sm:max-w-[360px] md:max-w-md h-[390px] sm:h-[340px] md:h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-2 md:border-4 border-stone-800">
+                    <img src="imgpri/capa.jpg" alt="Espaço Flowery - Estética e Bem-Estar" class="w-full h-full object-cover img-harmonizada">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- Texto de Apresentação -->
+            <div class="text-center md:text-left z-10 order-2 md:order-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <span class="text-rose-300 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-2 md:mb-4 block font-logo">Espaço Flowery • Cuidado & Autoestima</span>
+                <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-3 md:mb-6 leading-tight">Realce a sua beleza natural</h1>
+                <p class="text-stone-300 text-xs sm:text-sm md:text-lg font-light mb-4 md:mb-8 max-w-lg mx-auto md:mx-0">Serviços exclusivos de estética, olhar e bem-estar pensados especialmente para elevar a sua confiança e bem-estar.</p>
+                <div class="flex flex-col sm:flex-row gap-2.5 md:gap-4 justify-center md:justify-start">
+                    <a href="#servicos" class="bg-rose-900 hover:bg-rose-800 text-white font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition shadow-lg text-xs md:text-base text-center">
+                        Conhecer Serviços
+                    </a>
+                    <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20um%20horário%20no%20Espaço%20Flowery." target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-6 md:px-8 py-3 md:py-4 rounded-full transition text-xs md:text-base text-center">
+                        Falar no WhatsApp
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="py-16 md:py-20 px-4 md:px-6 bg-white border-b border-stone-200 relative z-20 shadow-[0_15px_30px_-15px_rgba(0,0,0,0.1)]">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10 md:mb-12" data-aos="fade-up">
+                <span class="text-rose-900 text-xs font-bold tracking-widest uppercase mb-3 block">Conheça a Profissional</span>
+                <h2 class="text-2xl md:text-4xl font-bold text-stone-900">Priscila Stoffelshauss</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-center bg-stone-50 border border-stone-200 p-6 md:p-12 rounded-3xl shadow-sm">
+                
+                <!-- Foto da Priscila -->
+                <div class="md:col-span-5 flex justify-center" data-aos="fade-right">
+                    <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-full md:h-80 rounded-2xl overflow-hidden shadow-md border-2 border-white">
+                        <img src="imgpri/pri.jpg" alt="Priscila Stoffelshauss - Espaço Flowery" class="w-full h-full object-cover img-harmonizada">
+                    </div>
+                </div>
+
+                <!-- Texto Sobre -->
+                <div class="md:col-span-7 text-center md:text-left" data-aos="fade-left">
+                    <span class="inline-block bg-rose-900 text-white px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3 md:mb-4">A Idealizadora</span>
+                    
+                    <p class="text-stone-700 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-4">
+                        "Olá, meu nome é <strong class="font-semibold text-stone-900">Priscila Stoffelshauss</strong>. Eu tenho um dom incrível, minha capacidade com trabalhos manuais é impressionante e decidi transformar esse dom na minha fonte de renda."
+                    </p>
+                    <p class="text-stone-600 text-sm sm:text-base font-light leading-relaxed mb-6">
+                        Me permita ser sua profissional e lhe mostrar do que sou capaz. Vem comigo!
+                    </p>
+
+                    <a href="https://wa.me/5548988539763?text=Olá,%20Priscila!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário." target="_blank" class="inline-block bg-rose-900 hover:bg-rose-800 text-white font-semibold px-7 py-3 rounded-full shadow-md transition text-sm">
+                        Agendar com a Priscila
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+    <section id="servicos" class="py-16 md:py-20 bg-stone-50 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-10 md:mb-12" data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold text-stone-900 mb-2 md:mb-3">Nossos Serviços</h2>
+                <p class="text-stone-500 text-sm md:text-base max-w-md mx-auto">Escolha o procedimento ideal para cuidar de você hoje mesmo.</p>
+            </div>
+
+            <!-- Filtros de Categoria -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10 md:mb-12" data-aos="fade-up" data-aos-delay="100">
+                <button @click="categoria = 'todos'" :class="categoria === 'todos' ? 'bg-stone-900 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-100'" class="px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-medium transition">Todos</button>
+                <button @click="categoria = 'rosto'" :class="categoria === 'rosto' ? 'bg-stone-900 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-100'" class="px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-medium transition">Rosto & Olhar</button>
+                <button @click="categoria = 'corpo'" :class="categoria === 'corpo' ? 'bg-stone-900 text-white shadow-md' : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-100'" class="px-4 md:px-5 py-2 rounded-full text-xs md:text-sm font-medium transition">Corpo & Cabelo</button>
+            </div>
+
+            <!-- Grid de Serviços -->
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                
+                <!-- Micropigmentação Labial -->
+                <div data-aos="fade-up" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'rosto'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/micropigmentation.jpg" alt="Micropigmentação Labial" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Micropigmentação Labial</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Técnica para dar cor, definição e viço natural aos lábios.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Micropigmentação%20Labial%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- Limpeza de Pele -->
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'rosto'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/limpeza-pele.jpg" alt="Limpeza de Pele" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Limpeza de Pele</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Remoção de impurezas, cravos e células mortas para pele renovada.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Limpeza%20de%20Pele%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- Design de Sobrancelha -->
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'rosto'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/sobrancelha.jpg" alt="Design de Sobrancelha" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Design de Sobrancelha</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Alinhamento e harmonização do formato das sobrancelhas.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Design%20de%20Sobrancelha%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- SPA dos Pés -->
+                <div data-aos="fade-up" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'corpo'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/spa-pes.jpg" alt="SPA dos Pés" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">SPA dos Pés</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Tratamento relaxante com esfoliação e hidratação profunda.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20SPA%20dos%20Pés%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- Lash Lifting -->
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'rosto'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/lash-lifting.jpg" alt="Lash Lifting" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Lash Lifting</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Curvatura e nutrição dos cílios naturais, destacando o olhar.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Lash%20Lifting%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- Hidratação Capilar -->
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'corpo'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/hidratacao.jpg" alt="Hidratação Capilar" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Hidratação Capilar</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Reposição de nutrientes e brilho intenso para recuperar fios.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Hidratação%20Capilar%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- Massagem Relaxante -->
+                <div data-aos="fade-up" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'corpo'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/massagem.jpg" alt="Massagem Relaxante" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Massagem Relaxante</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">Alívio de tensões musculares, estresse e relaxamento corporal.</p>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Massagem%20Relaxante%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+                <!-- Extensão de Cílios -->
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-stone-300 transition hover:-translate-y-1 hover:shadow-md" x-show="categoria === 'todos' || categoria === 'rosto'">
+                    <div>
+                        <div class="h-28 sm:h-36 md:h-48 overflow-hidden bg-stone-100">
+                            <img src="imgpri/cilios.jpg" alt="Extensão de Cílios" class="w-full h-full object-cover img-harmonizada transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-3 sm:p-4 md:p-6">
+                            <h3 class="font-bold text-xs sm:text-sm md:text-lg text-stone-900 mb-1.5 md:mb-2 leading-snug">Extensão de Cílios</h3>
+                            <p class="text-stone-500 text-[11px] sm:text-xs md:text-sm mb-3 leading-relaxed">Técnicas especializadas:</p>
+                            <div class="grid grid-cols-2 gap-1.5 md:gap-2 mb-2">
+                                <div class="bg-stone-50 p-2 rounded-lg text-stone-700 font-medium text-[10px] sm:text-xs">• Brasileiro</div>
+                                <div class="bg-stone-50 p-2 rounded-lg text-stone-700 font-medium text-[10px] sm:text-xs">• Egípcio</div>
+                                <div class="bg-stone-50 p-2 rounded-lg text-stone-700 font-medium text-[10px] sm:text-xs">• Mega</div>
+                                <div class="bg-stone-50 p-2 rounded-lg text-stone-700 font-medium text-[10px] sm:text-xs">• Luxo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 sm:p-4 md:pt-0 md:px-6 md:pb-6">
+                        <a href="https://wa.me/5548988539763?text=Olá!%20Gostaria%20de%20agendar%20Extensão%20de%20Cílios%20no%20Espaço%20Flowery." target="_blank" class="w-full block text-center bg-stone-100 hover:bg-rose-900 hover:text-white text-stone-800 text-[11px] sm:text-xs md:text-sm font-semibold py-2 md:py-2.5 rounded-xl transition">Agendar</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Carrossel Infinito Real -->
+    <section id="avaliacoes" class="py-16 md:py-20 bg-white border-t border-stone-200 relative z-20 shadow-[0_-15px_30px_-15px_rgba(0,0,0,0.1)] overflow-hidden" 
+        x-data="{
+            ativo: 0,
+            totalOriginal: 4,
+            transicaoAtiva: true,
+            intervalo: null,
+            proximo() {
+                this.transicaoAtiva = true;
+                this.ativo++;
+                let maxIndex = this.totalOriginal;
+                if (this.ativo >= maxIndex) {
+                    setTimeout(() => {
+                        this.transicaoAtiva = false;
+                        this.ativo = 0;
+                    }, 700);
+                }
+            },
+            anterior() {
+                this.transicaoAtiva = true;
+                this.ativo--;
+                if (this.ativo < 0) {
+                    this.transicaoAtiva = false;
+                    this.ativo = this.totalOriginal - 1;
+                }
+            },
+            iniciarAutoPlay() {
+                this.intervalo = setInterval(() => { this.proximo(); }, 4000);
+            },
+            pararAutoPlay() {
+                clearInterval(this.intervalo);
+            }
+        }"
+        x-init="iniciarAutoPlay()"
+        @mouseenter="pararAutoPlay()"
+        @mouseleave="iniciarAutoPlay()"
+    >
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-10 md:mb-12" data-aos="fade-up">
+                <span class="text-rose-900 text-xs font-bold tracking-widest uppercase mb-3 block">Depoimentos Reais</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-stone-900 mb-2">O que dizem nossas clientes</h2>
+                <p class="text-stone-500 text-sm">Avaliações verificadas de quem já passou pela experiência Flowery.</p>
+            </div>
+
+            <!-- Container do Carrossel com setas laterais -->
+            <div class="relative px-3 md:px-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="overflow-hidden">
+                    <div class="flex" :class="transicaoAtiva ? 'transition-transform duration-700 ease-in-out' : ''" :style="'transform: translateX(-' + (ativo * (100 / (window.innerWidth >= 768 ? 3 : 2))) + '%)'">
+                        
+                        <!-- Bloco Original (1 a 4) -->
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">KS</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Kamila Souza</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">6 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "Gente, meu cabelo ficou PERFEITO! Top demais — alinhado, brilhoso e super natural. EXCELÊNCIA no que faz, profissional de altíssimo nível! ❤️"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">AM</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Alexsandra Martins</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">3 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "Atendimento excelente, a Priscila é uma querida. Fiz designer de sobrancelha e cortei o cabelo e ela arrasou ❤️❤️"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">AA</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Aline Anjos</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">5 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "O trabalho da Priscila é impecável, feito com todo cuidado e amor. É uma profissão excelente!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">DT</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Dieula lene</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">6 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "Fui atendida com todo amor e cuidado. Recomendo muito o espaço da Pri..."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bloco Duplicado (Transição infinita) -->
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">KS</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Kamila Souza</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">6 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "Gente, meu cabelo ficou PERFEITO! Top demais — alinhado, brilhoso e super natural. EXCELÊNCIA no que faz, profissional de altíssimo nível! ❤️"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">AM</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Alexsandra Martins</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">3 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "Atendimento excelente, a Priscila é uma querida. Fiz designer de sobrancelha e cortei o cabelo e ela arrasou ❤️❤️"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">AA</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Aline Anjos</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">5 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "O trabalho da Priscila é impecável, feito com todo cuidado e amor. É uma profissão excelente!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3">
+                            <div class="bg-stone-50 p-4 md:p-8 rounded-3xl border border-stone-200 shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 md:w-12 md:h-12 rounded-full bg-rose-100 text-rose-900 font-bold flex items-center justify-center text-xs md:text-lg flex-shrink-0">DT</div>
+                                            <div>
+                                                <h3 class="font-bold text-stone-900 text-xs md:text-base leading-tight">Dieula lene</h3>
+                                                <p class="text-stone-400 text-[9px] md:text-xs">6 meses atrás</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-amber-400 text-[10px] md:text-sm">★★★★★</div>
+                                    </div>
+                                    <p class="text-stone-600 text-[11px] md:text-base italic leading-relaxed">
+                                        "Fui atendida com todo amor e cuidado. Recomendo muito o espaço da Pri..."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Botões de Navegação Laterais -->
+                <button @click="anterior" class="absolute -left-1 md:left-0 top-1/2 -translate-y-1/2 bg-white hover:bg-stone-50 border border-stone-200 text-stone-800 w-8 h-8 md:w-10 md:h-10 rounded-full shadow-md flex items-center justify-center transition z-10 text-sm">
+                    ‹
+                </button>
+                <button @click="proximo" class="absolute -right-1 md:right-0 top-1/2 -translate-y-1/2 bg-white hover:bg-stone-50 border border-stone-200 text-stone-800 w-8 h-8 md:w-10 md:h-10 rounded-full shadow-md flex items-center justify-center transition z-10 text-sm">
+                    ›
+                </button>
+            </div>
+
+            <!-- Indicadores (Bolinhas) -->
+            <div class="flex justify-center gap-2 mt-8" data-aos="fade-up" data-aos-delay="300">
+                <button @click="ativo = 0" :class="ativo % 4 === 0 ? 'bg-rose-900 w-6' : 'bg-stone-300 w-2'" class="h-2 rounded-full transition-all duration-300"></button>
+                <button @click="ativo = 1" :class="ativo % 4 === 1 ? 'bg-rose-900 w-6' : 'bg-stone-300 w-2'" class="h-2 rounded-full transition-all duration-300"></button>
+                <button @click="ativo = 2" :class="ativo % 4 === 2 ? 'bg-rose-900 w-6' : 'bg-stone-300 w-2'" class="h-2 rounded-full transition-all duration-300"></button>
+                <button @click="ativo = 3" :class="ativo % 4 === 3 ? 'bg-rose-900 w-6' : 'bg-stone-300 w-2'" class="h-2 rounded-full transition-all duration-300"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-stone-900 text-stone-400 py-12 px-6 border-t border-stone-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left" data-aos="fade-up">
+            <div>
+                <p class="text-white font-bold tracking-wider uppercase mb-1 font-logo">Espaço Flowery</p>
+                <p class="text-sm">Transformando o seu cuidado diário em momentos únicos.</p>
+            </div>
+            <div class="text-sm">
+                <p class="mb-1">Atendimento com horário marcado.</p>
+                <p>Dúvidas? Entre em contato via WhatsApp pelos botões do site.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Script de Inicialização -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800, 
+            once: true,    
+            offset: 80     
+        });
+    </script>
+</body>
+</html>
